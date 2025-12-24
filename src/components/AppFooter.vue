@@ -3,7 +3,7 @@
     <div class="mx-auto p-4">
       <div class="flex items-center justify-end">
         <a
-          href="https://github.com/crony-io/"
+          href="https://github.com/crony-io/seochecker"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-body transition hover:bg-surface-hover"
