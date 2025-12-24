@@ -1,0 +1,618 @@
+{
+  "app": {
+    "title": "SEO Checker",
+    "description": "Analiza el rendimiento SEO de cualquier sitio web al instante",
+    "about": {
+      "title": "Acerca de SEO Checker",
+      "description": "Una herramienta gratuita de análisis SEO del lado del cliente que te ayuda a optimizar tu sitio web para los motores de búsqueda. Todo el análisis se realiza en tu navegador - no se envían datos a ningún servidor.",
+      "whatItDoes": {
+        "title": "Qué Hace",
+        "description": "SEO Checker analiza páginas web y proporciona información detallada sobre su optimización para motores de búsqueda. Examina múltiples aspectos de tu sitio para ayudarte a mejorar la visibilidad y los rankings."
+      },
+      "features": {
+        "metaTags": {
+          "title": "Análisis de Meta Tags",
+          "description": "Verifica título, descripción, Open Graph y Twitter Cards"
+        },
+        "headings": {
+          "title": "Estructura de Encabezados",
+          "description": "Analiza la jerarquía H1-H6 y optimización de encabezados"
+        },
+        "content": {
+          "title": "Análisis de Contenido",
+          "description": "Conteo de palabras, tiempo de lectura y ratio texto/HTML"
+        },
+        "images": {
+          "title": "Optimización de Imágenes",
+          "description": "Atributos alt, carga diferida y análisis de formatos"
+        },
+        "links": {
+          "title": "Análisis de Enlaces",
+          "description": "Desglose de enlaces internos, externos y nofollow"
+        },
+        "technical": {
+          "title": "SEO Técnico",
+          "description": "Verificaciones de HTTPS, viewport, canonical y más"
+        }
+      },
+      "benefits": {
+        "title": "¿Por Qué Usar SEO Checker?",
+        "privacy": {
+          "title": "100% Privado",
+          "description": "Todo el análisis se ejecuta en tu navegador. No se envían datos a ningún servidor."
+        },
+        "fast": {
+          "title": "Resultados Instantáneos",
+          "description": "Obtén información SEO completa en segundos."
+        },
+        "free": {
+          "title": "Completamente Gratis",
+          "description": "Sin registro, sin límites, sin costos ocultos."
+        }
+      },
+      "howItWorks": {
+        "title": "Cómo Funciona",
+        "step1": "Ingresa la URL del sitio web que deseas analizar",
+        "step2": "La herramienta obtiene el HTML de la página usando proxies CORS (o puedes pegar el HTML manualmente)",
+        "step3": "Ve los resultados detallados del análisis con puntuaciones y recomendaciones"
+      },
+      "techStack": {
+        "title": "Construido Con"
+      }
+    }
+  },
+  "errors": {
+    "boundary": {
+      "title": "Algo salió mal",
+      "description": "Ocurrió un error inesperado. Puedes intentar de nuevo o recargar la página.",
+      "component": "Componente",
+      "retry": "Intentar de Nuevo",
+      "reload": "Recargar Página"
+    }
+  },
+  "common": {
+    "generate": "Generar",
+    "copy": "Copiar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "loading": "Cargando...",
+    "more": "más",
+    "success": "¡Éxito!",
+    "error": "Error",
+    "warning": "Advertencia",
+    "unknown": "Desconocido",
+    "unknownError": "Error desconocido",
+    "example": "Ejemplo",
+    "share": "Compartir",
+    "copied": "¡Copiado!",
+    "copyLink": "Copiar Enlace",
+    "shareLink": "Compartir Enlace"
+  },
+  "theme": {
+    "selector": {
+      "aria_label": "Cambiar tema a {theme}"
+    },
+    "options": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    }
+  },
+  "language": {
+    "selector": {
+      "aria_label": "Cambiar idioma a {language}"
+    }
+  },
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "toggleMenu": "Alternar menú"
+  },
+  "footer": {
+    "github": {
+      "label": "GitHub",
+      "aria_label": "Abrir repositorio de GitHub"
+    }
+  },
+  "seo": {
+    "hero": {
+      "title": "Analizador SEO Gratuito",
+      "description": "Obtén información SEO instantánea para cualquier sitio web. Analiza meta tags, encabezados, contenido, imágenes, enlaces y más - todo en tu navegador."
+    },
+    "urlInput": {
+      "placeholder": "Ingresa la URL del sitio (ej: ejemplo.com)",
+      "analyze": "Analizar",
+      "analyzing": "Analizando...",
+      "corsError": "No se pudo obtener el sitio web directamente",
+      "pasteHtml": "Puedes pegar el código HTML fuente abajo para continuar el análisis.",
+      "htmlPlaceholder": "Pega el código HTML aquí...",
+      "analyzeHtml": "Analizar HTML"
+    },
+    "history": {
+      "title": "Análisis Recientes",
+      "clear": "Limpiar Historial"
+    },
+    "results": {
+      "title": "Resultados del Análisis",
+      "overallScore": "Puntuación General",
+      "summary": "Resumen Rápido",
+      "newAnalysis": "Nuevo Análisis",
+      "fetchTime": "Tiempo de carga"
+    },
+    "score": {
+      "grades": {
+        "excellent": "Excelente",
+        "good": "Bueno",
+        "needsWork": "Necesita Mejoras",
+        "poor": "Deficiente",
+        "critical": "Crítico"
+      }
+    },
+    "meta": {
+      "title": "Meta Tags",
+      "pageTitle": "Título de Página",
+      "description": "Meta Descripción",
+      "canonical": "URL Canónica",
+      "robots": "Robots",
+      "viewport": "Viewport",
+      "openGraph": "Open Graph",
+      "twitterCard": "Twitter Card",
+      "chars": "caracteres",
+      "missing": "Faltante",
+      "notSet": "No definido"
+    },
+    "headings": {
+      "title": "Encabezados",
+      "h1Count": "Tags H1",
+      "total": "Total",
+      "hierarchy": "Jerarquía",
+      "proper": "Correcta",
+      "hasGaps": "Con saltos",
+      "empty": "(vacío)",
+      "noHeadings": "No se encontraron encabezados en esta página."
+    },
+    "content": {
+      "title": "Análisis de Contenido",
+      "words": "Palabras",
+      "readTime": "Tiempo de Lectura",
+      "minutes": "min",
+      "paragraphs": "Párrafos",
+      "sentences": "oraciones",
+      "textHtmlRatio": "Texto/HTML",
+      "avgWords": "Promedio palabras por oración",
+      "goodLength": "Buena longitud",
+      "shortContent": "Considera agregar más contenido",
+      "optimal": "Ratio óptimo",
+      "lowRatio": "Ratio de texto bajo"
+    },
+    "keywords": {
+      "title": "Palabras Clave",
+      "totalWords": "Total de Palabras",
+      "uniqueWords": "Palabras Únicas",
+      "topKeywords": "Palabras Clave Principales",
+      "consistency": "Consistencia de Keywords",
+      "inTitle": "En Título",
+      "inDescription": "En Descripción",
+      "inH1": "En H1",
+      "noMatch": "Sin coincidencias",
+      "cloud": "Nube de Palabras Clave",
+      "noKeywords": "No se encontraron palabras clave",
+      "cloudDescription": "El tamaño de la palabra representa la frecuencia. Pasa el cursor para más detalles."
+    },
+    "images": {
+      "title": "Imágenes",
+      "total": "Total de Imágenes",
+      "missingAlt": "Sin Alt",
+      "lazyLoading": "Carga Diferida",
+      "formats": "Formatos",
+      "issues": "Imágenes con Problemas",
+      "noSrc": "Sin fuente",
+      "noImages": "No se encontraron imágenes en esta página."
+    },
+    "links": {
+      "title": "Enlaces",
+      "total": "Total de Enlaces",
+      "internal": "Internos",
+      "external": "Externos",
+      "nofollow": "Nofollow",
+      "issues": "Enlaces con Problemas",
+      "emptyText": "(sin texto)",
+      "noLinks": "No se encontraron enlaces en esta página."
+    },
+    "technical": {
+      "title": "SEO Técnico",
+      "secure": "Conexión segura",
+      "notSecure": "No seguro",
+      "present": "Presente",
+      "missing": "Faltante",
+      "notSet": "No definido",
+      "notFound": "No encontrado",
+      "charset": "Codificación",
+      "viewport": "Viewport",
+      "canonical": "Canónico",
+      "language": "Idioma",
+      "urlLength": "Longitud URL"
+    },
+    "performance": {
+      "title": "Rendimiento",
+      "htmlSize": "Tamaño HTML",
+      "domElements": "Elementos DOM",
+      "domDepth": "Profundidad DOM",
+      "blocking": "Bloqueantes",
+      "resources": "recursos",
+      "levels": "niveles",
+      "scripts": "Scripts",
+      "stylesheets": "Hojas de Estilo",
+      "inlineScripts": "Scripts Inline",
+      "inlineStyles": "Estilos Inline",
+      "good": "Buen tamaño",
+      "large": "Considera optimizar",
+      "optimal": "Óptimo",
+      "complex": "DOM complejo"
+    },
+    "previews": {
+      "title": "Vistas Previas Sociales",
+      "serp": {
+        "title": "Vista Previa en Google",
+        "desktop": "Escritorio",
+        "mobile": "Móvil",
+        "noTitle": "Sin título definido",
+        "noDescription": "Sin meta descripción. Agrega una descripción para mejorar el CTR."
+      },
+      "facebook": {
+        "title": "Vista Previa en Facebook",
+        "noTitle": "Sin título definido",
+        "noDescription": "Sin descripción disponible",
+        "noImage": "Sin og:image definido",
+        "imageSet": "Definido",
+        "imageMissing": "Faltante",
+        "recommended": "Tamaño recomendado"
+      },
+      "twitter": {
+        "title": "Vista Previa en X (Twitter)",
+        "noTitle": "Sin título definido",
+        "noImage": "Sin imagen definida",
+        "recommended": "Tamaño recomendado"
+      }
+    },
+    "export": {
+      "title": "Exportar Reporte",
+      "pdf": "Descargar PDF",
+      "json": "Descargar JSON",
+      "csv": "Descargar CSV",
+      "generating": "Generando..."
+    },
+    "checklist": {
+      "title": "Lista de Verificación SEO",
+      "critical": "Crítico",
+      "important": "Importante",
+      "optional": "Opcional",
+      "completed": "completados",
+      "pending": "pendientes"
+    },
+    "readingLevel": {
+      "title": "Nivel de Lectura",
+      "score": "Facilidad de Lectura",
+      "gradeLevel": "Nivel Escolar",
+      "gradeLabel": "Grado EE.UU.",
+      "audience": "Audiencia Objetivo",
+      "audienceLabel": "Nivel de lectura",
+      "avgSyllables": "Sílabas promedio/palabra",
+      "avgWords": "Palabras promedio/oración",
+      "recommendation": "Para contenido web, apunta a una puntuación de Facilidad de Lectura Flesch de 60-70 (nivel de 8vo-9no grado) para llegar a la audiencia más amplia.",
+      "labels": {
+        "veryEasy": "Muy Fácil",
+        "easy": "Fácil",
+        "fairlyEasy": "Bastante Fácil",
+        "standard": "Estándar",
+        "fairlyDifficult": "Bastante Difícil",
+        "difficult": "Difícil",
+        "veryDifficult": "Muy Difícil"
+      },
+      "audiences": {
+        "grade5": "5to grado",
+        "grade6": "6to grado",
+        "grade7": "7mo grado",
+        "grade8to9": "8vo-9no grado",
+        "grade10to12": "10mo-12vo grado",
+        "college": "Universidad",
+        "collegeGraduate": "Posgrado"
+      }
+    },
+    "comparison": {
+      "title": "Comparar URLs",
+      "url1": "URL 1",
+      "url2": "URL 2",
+      "compare": "Comparar",
+      "analyzing": "Analizando...",
+      "metric": "Métrica",
+      "overallScore": "Puntuación General"
+    },
+    "resourceHints": {
+      "title": "Sugerencias de Recursos",
+      "optimized": "Optimizado",
+      "notOptimized": "Sin sugerencias de recursos",
+      "preload": "Preload",
+      "prefetch": "Prefetch",
+      "preconnect": "Preconnect",
+      "dnsPrefetch": "DNS Prefetch",
+      "none": "Ninguno detectado",
+      "description": "Las sugerencias de recursos ayudan a los navegadores a priorizar la carga de recursos críticos para mejor rendimiento."
+    },
+    "socialAnalytics": {
+      "title": "Analytics y Frameworks",
+      "analytics": "Herramientas de Analytics",
+      "frameworks": "Frameworks JS",
+      "socialLinks": "Enlaces a Redes Sociales",
+      "noFrameworks": "No se detectaron frameworks",
+      "noSocialLinks": "No se encontraron enlaces a redes sociales"
+    },
+    "anchorText": {
+      "title": "Análisis de Textos Ancla",
+      "total": "Total de Enlaces",
+      "descriptive": "Descriptivos",
+      "generic": "Genéricos",
+      "overOptimized": "Sobre-optimizados",
+      "quality": "Calidad del Texto Ancla",
+      "genericFound": "Textos genéricos encontrados",
+      "description": "Los textos ancla descriptivos ayudan a los motores de búsqueda a entender el contexto del enlace. Evita frases genéricas como 'clic aquí'."
+    },
+    "mobile": {
+      "title": "Responsividad Móvil",
+      "viewport": "Viewport",
+      "responsiveImages": "Imágenes Srcset",
+      "pictureElements": "Elementos Picture",
+      "mediaQueries": "Media Queries",
+      "viewportContent": "Contenido del Viewport",
+      "responsiveImagesCheck": "Imágenes responsivas (srcset/picture)",
+      "fontSizes": "Tamaños de fuente móvil",
+      "touchTargets": "Tamaño de objetivos táctiles (44px+)",
+      "issues": "Problemas Encontrados"
+    },
+    "schema": {
+      "title": "Datos Estructurados (Schema.org)",
+      "noSchema": "No se encontraron datos estructurados",
+      "recommendation": "Considera agregar datos estructurados JSON-LD para habilitar fragmentos enriquecidos en los resultados de búsqueda.",
+      "richSnippetPreview": "Vista Previa de Fragmento Enriquecido",
+      "untitled": "Sin título",
+      "reviews": "reseñas",
+      "viewRawJson": "Ver JSON-LD sin procesar"
+    },
+    "robotsTxt": {
+      "title": "Robots.txt y Sitemap",
+      "robotsFile": "Robots.txt",
+      "sitemap": "Sitemap",
+      "found": "Encontrado",
+      "notFound": "No encontrado",
+      "userAgents": "User Agents",
+      "directives": "Directivas",
+      "allowed": "Permitido",
+      "disallowed": "Bloqueado",
+      "crawlDelay": "Crawl Delay",
+      "sitemapsFound": "Sitemaps Encontrados",
+      "sitemapIndex": "Índice de Sitemap",
+      "xmlSitemap": "Sitemap XML",
+      "fromRobots": "Desde robots.txt",
+      "defaultLocation": "Ubicación por defecto",
+      "issues": "Problemas",
+      "noIssues": "Sin problemas detectados",
+      "viewContent": "Ver Contenido",
+      "seconds": "segundos",
+      "description": "Robots.txt controla el acceso de rastreadores. Los sitemaps ayudan a los motores de búsqueda a descubrir páginas."
+    },
+    "security": {
+      "title": "Análisis de Seguridad",
+      "https": {
+        "title": "HTTPS",
+        "secure": "Conexión segura",
+        "notSecure": "No seguro",
+        "mixedContent": "Contenido Mixto",
+        "mixedContentFound": "{count} recurso(s) con contenido mixto encontrado(s)",
+        "noMixedContent": "Sin contenido mixto",
+        "upgradeInsecure": "Upgrade Insecure Requests",
+        "present": "Presente",
+        "missing": "Faltante"
+      },
+      "headers": {
+        "title": "Headers de Seguridad",
+        "corsBlocked": "Los headers no pudieron verificarse debido a restricciones CORS",
+        "corsNote": "Esto no significa que falten, solo que no son accesibles desde el navegador.",
+        "critical": "Crítico",
+        "recommended": "Recomendado",
+        "optional": "Opcional"
+      },
+      "forms": {
+        "title": "Seguridad de Formularios",
+        "totalForms": "Total de Formularios",
+        "withHttps": "Usando HTTPS",
+        "withCSRF": "Con Protección CSRF",
+        "sensitiveData": "Con Datos Sensibles",
+        "criticalIssues": "Problemas Críticos",
+        "noForms": "No se encontraron formularios en esta página",
+        "csrfProtection": "Protección CSRF",
+        "captcha": "CAPTCHA"
+      },
+      "score": "Puntuación de Seguridad",
+      "issues": "Problemas de Seguridad",
+      "noIssues": "Sin problemas de seguridad detectados",
+      "description": "El análisis de seguridad verifica HTTPS, headers de seguridad y protección de formularios."
+    },
+    "urlAnalysis": {
+      "title": "Análisis de URL",
+      "structure": "Estructura de URL",
+      "readability": "Legibilidad",
+      "protocol": "Protocolo",
+      "hostname": "Hostname",
+      "path": "Ruta",
+      "depth": "Profundidad",
+      "length": "Longitud",
+      "characters": "caracteres",
+      "levels": "niveles",
+      "hasWww": "Prefijo WWW",
+      "trailingSlash": "Barra Final",
+      "queryParams": "Parámetros de Consulta",
+      "score": "Puntuación de URL",
+      "issues": "Problemas de URL",
+      "noIssues": "La estructura de URL es amigable para SEO",
+      "underscores": "Contiene guiones bajos",
+      "uppercase": "Contiene mayúsculas",
+      "specialChars": "Caracteres especiales",
+      "keywords": "Palabras clave en URL",
+      "description": "URLs limpias y legibles ayudan a los motores de búsqueda y usuarios a entender el contenido."
+    },
+    "embeddedContent": {
+      "title": "Contenido Embebido",
+      "iframes": "Iframes",
+      "videos": "Videos",
+      "audios": "Audio",
+      "total": "Total",
+      "noContent": "No se encontró contenido embebido",
+      "noSrc": "Sin src",
+      "hasTitle": "título",
+      "hasControls": "controles",
+      "hasCaptions": "subtítulos",
+      "lazy": "lazy",
+      "missingTitle": "Falta título",
+      "missingControls": "Faltan controles",
+      "missingCaptions": "Faltan subtítulos",
+      "autoplay": "Reproducción automática",
+      "lazyLoading": "Carga diferida",
+      "sandbox": "Sandbox",
+      "poster": "Imagen de portada",
+      "responsive": "Responsivo",
+      "issues": "Problemas",
+      "description": "El contenido embebido debe ser accesible y optimizado para el rendimiento."
+    },
+    "analyzers": {
+      "meta": {
+        "titleLabel": "Título",
+        "descriptionLabel": "Descripción",
+        "keywordsLabel": "Palabras clave",
+        "robotsLabel": "Robots",
+        "viewportLabel": "Viewport",
+        "canonicalLabel": "Canonical",
+        "goodLength": "Buena longitud ({length} caracteres)",
+        "missingTitle": "Falta la etiqueta title",
+        "lengthWarning": "Longitud {length} caracteres (óptimo: {min}-{max})",
+        "missingDescription": "Falta la meta descripción",
+        "keywordsDeprecated": "Las meta keywords están obsoletas desde 2009",
+        "keywordsNotSet": "No configurado (no requerido)",
+        "robotsDefault": "index, follow (por defecto)",
+        "robotsNoindex": "La página está configurada como noindex",
+        "missingViewport": "Falta la etiqueta meta viewport",
+        "canonicalMatches": "El canonical coincide con la URL actual",
+        "canonicalDiffers": "El canonical difiere de la URL actual",
+        "canonicalMissing": "No se especificó URL canonical"
+      },
+      "headings": {
+        "skippedLevel": "Nivel de encabezado omitido (H{prev} → H{next})",
+        "emptyHeading": "Encabezado vacío",
+        "missingH1": "Falta la etiqueta H1",
+        "multipleH1": "Se encontraron múltiples etiquetas H1 ({count})",
+        "hierarchyGaps": "La jerarquía de encabezados tiene vacíos"
+      },
+      "images": {
+        "missingAlt": "Falta el atributo alt",
+        "genericFilename": "Nombre de archivo genérico detectado"
+      },
+      "links": {
+        "nonDescriptive": "Texto de anclaje no descriptivo",
+        "emptyAnchor": "Texto de anclaje vacío"
+      },
+      "anchorText": {
+        "tooManyGeneric": "Demasiados textos de anclaje genéricos como \"clic aquí\" o \"leer más\"",
+        "tooLong": "Algunos textos de anclaje son muy largos y pueden estar sobre-optimizados"
+      },
+      "mobile": {
+        "missingViewport": "Falta la etiqueta meta viewport - esencial para responsividad móvil",
+        "noResponsiveImages": "No se encontraron imágenes responsivas (srcset o elementos picture)",
+        "smallFonts": "{count} elemento(s) con tamaño de fuente menor a 14px",
+        "smallTouchTargets": "{count} elemento(s) interactivo(s) pueden tener objetivos táctiles pequeños",
+        "noMediaQueries": "No se detectaron media queries CSS"
+      }
+    },
+    "resourceOptimization": {
+      "title": "Optimización de Recursos",
+      "minification": "Minificación",
+      "scripts": "Scripts",
+      "stylesheets": "Hojas de estilo",
+      "minified": "Minificado",
+      "notMinified": "No minificado",
+      "printStyles": "Estilos de Impresión",
+      "hasPrintStyles": "Estilos de impresión detectados",
+      "noPrintStyles": "Sin estilos de impresión",
+      "printMediaQueries": "Media queries de impresión",
+      "description": "Los recursos minificados cargan más rápido y mejoran el rendimiento."
+    },
+    "rendering": {
+      "title": "Análisis de Renderizado",
+      "type": "Tipo de Renderizado",
+      "ssr": "Renderizado en Servidor",
+      "csr": "Renderizado en Cliente",
+      "hybrid": "Híbrido (SSR + Hidratación)",
+      "static": "HTML Estático",
+      "unknown": "Desconocido",
+      "confidence": "Confianza",
+      "indicators": "Indicadores de Detección",
+      "noscriptFallback": "Respaldo Noscript",
+      "hydrationMarkers": "Marcadores de Hidratación",
+      "description": "El renderizado en servidor mejora el SEO al proporcionar contenido rastreable."
+    },
+    "lazyContent": {
+      "title": "Carga Diferida y Scroll Infinito",
+      "infiniteScroll": "Scroll Infinito",
+      "detected": "Detectado",
+      "notDetected": "No detectado",
+      "lazyImages": "Imágenes Lazy",
+      "lazyIframes": "Iframes Lazy",
+      "pagination": "Paginación",
+      "hasPagination": "Enlaces de paginación encontrados",
+      "noPagination": "Sin paginación",
+      "patterns": "Patrones Detectados",
+      "recommendations": "Recomendaciones",
+      "description": "La carga diferida mejora el rendimiento, pero asegura que el contenido sea rastreable."
+    },
+    "socialShare": {
+      "title": "Botones para Compartir",
+      "detected": "Botones de compartir detectados",
+      "notDetected": "No se encontraron botones de compartir",
+      "platforms": "Plataformas",
+      "widgets": "Widgets de Compartir",
+      "nativeApi": "API Web Share",
+      "description": "Los botones de compartir fomentan la difusión del contenido y aumentan la visibilidad."
+    },
+    "accessibility": {
+      "title": "Accesibilidad (WCAG)",
+      "score": "Puntuación de Accesibilidad",
+      "issues": "Problemas",
+      "passed": "Verificaciones Pasadas",
+      "landmarks": "Landmarks",
+      "aria": "Uso de ARIA",
+      "forms": "Accesibilidad de Formularios",
+      "errors": "Errores",
+      "warnings": "Advertencias",
+      "wcagLevel": "Nivel WCAG",
+      "wcagCriteria": "Criterio",
+      "inputsWithLabels": "Inputs con etiquetas",
+      "inputsTotal": "Total de inputs",
+      "description": "La accesibilidad asegura que tu contenido sea usable por todos, incluyendo rastreadores."
+    },
+    "coreWebVitals": {
+      "title": "Core Web Vitals (Estimado)",
+      "lcp": "LCP (Pintado del Contenido Más Grande)",
+      "cls": "CLS (Cambio de Diseño Acumulativo)",
+      "fid": "FID (Primer Retardo de Entrada)",
+      "inp": "INP (Interacción al Siguiente Pintado)",
+      "good": "Bueno",
+      "needsImprovement": "Necesita Mejoras",
+      "poor": "Deficiente",
+      "unknown": "Desconocido",
+      "factors": "Factores",
+      "recommendations": "Recomendaciones",
+      "largestElement": "Elemento Más Grande",
+      "description": "Estimaciones basadas en análisis HTML. Usa herramientas de monitoreo real para mediciones precisas."
+    }
+  }
+}

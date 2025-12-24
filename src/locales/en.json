@@ -1,0 +1,618 @@
+{
+  "app": {
+    "title": "SEO Checker",
+    "description": "Analyze any website's SEO performance instantly",
+    "about": {
+      "title": "About SEO Checker",
+      "description": "A free, client-side SEO analysis tool that helps you optimize your website for search engines. All analysis happens in your browser - no data is sent to any server.",
+      "whatItDoes": {
+        "title": "What It Does",
+        "description": "SEO Checker analyzes web pages and provides detailed insights about their search engine optimization. It examines multiple aspects of your site to help you improve visibility and rankings."
+      },
+      "features": {
+        "metaTags": {
+          "title": "Meta Tags Analysis",
+          "description": "Check title, description, Open Graph, and Twitter Card tags"
+        },
+        "headings": {
+          "title": "Headings Structure",
+          "description": "Analyze H1-H6 hierarchy and heading optimization"
+        },
+        "content": {
+          "title": "Content Analysis",
+          "description": "Word count, reading time, and text-to-HTML ratio"
+        },
+        "images": {
+          "title": "Image Optimization",
+          "description": "Alt attributes, lazy loading, and format analysis"
+        },
+        "links": {
+          "title": "Link Analysis",
+          "description": "Internal, external, and nofollow link breakdown"
+        },
+        "technical": {
+          "title": "Technical SEO",
+          "description": "HTTPS, viewport, canonical, and more checks"
+        }
+      },
+      "benefits": {
+        "title": "Why Use SEO Checker?",
+        "privacy": {
+          "title": "100% Private",
+          "description": "All analysis runs in your browser. No data is sent to any server."
+        },
+        "fast": {
+          "title": "Instant Results",
+          "description": "Get comprehensive SEO insights in seconds."
+        },
+        "free": {
+          "title": "Completely Free",
+          "description": "No signup, no limits, no hidden costs."
+        }
+      },
+      "howItWorks": {
+        "title": "How It Works",
+        "step1": "Enter the URL of the website you want to analyze",
+        "step2": "The tool fetches the page HTML using CORS proxies (or you can paste HTML manually)",
+        "step3": "View detailed analysis results with scores and recommendations"
+      },
+      "techStack": {
+        "title": "Built With"
+      }
+    }
+  },
+  "errors": {
+    "boundary": {
+      "title": "Something went wrong",
+      "description": "An unexpected error occurred. You can try again or reload the page.",
+      "component": "Component",
+      "retry": "Try Again",
+      "reload": "Reload Page"
+    }
+  },
+  "common": {
+    "generate": "Generate",
+    "copy": "Copy",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "success": "Success!",
+    "error": "Error",
+    "warning": "Warning",
+    "unknown": "Unknown",
+    "unknownError": "Unknown error",
+    "example": "Example",
+    "more": "more",
+    "share": "Share",
+    "copied": "Copied!",
+    "copyLink": "Copy Link",
+    "shareLink": "Share Link"
+  },
+  "theme": {
+    "selector": {
+      "aria_label": "Change theme to {theme}"
+    },
+    "options": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "language": {
+    "selector": {
+      "aria_label": "Change language to {language}"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "toggleMenu": "Toggle menu"
+  },
+  "footer": {
+    "github": {
+      "label": "GitHub",
+      "aria_label": "Open GitHub repository"
+    }
+  },
+  "seo": {
+    "hero": {
+      "title": "Free SEO Analyzer",
+      "description": "Get instant SEO insights for any website. Analyze meta tags, headings, content, images, links, and more - all in your browser."
+    },
+    "urlInput": {
+      "placeholder": "Enter website URL (e.g., example.com)",
+      "analyze": "Analyze",
+      "analyzing": "Analyzing...",
+      "corsError": "Unable to fetch the website directly",
+      "pasteHtml": "You can paste the HTML source code below to continue the analysis.",
+      "htmlPlaceholder": "Paste HTML source code here...",
+      "analyzeHtml": "Analyze HTML"
+    },
+    "history": {
+      "title": "Recent Analyses",
+      "clear": "Clear History"
+    },
+    "results": {
+      "title": "Analysis Results",
+      "overallScore": "Overall Score",
+      "summary": "Quick Summary",
+      "newAnalysis": "New Analysis",
+      "fetchTime": "Fetch time"
+    },
+    "score": {
+      "grades": {
+        "excellent": "Excellent",
+        "good": "Good",
+        "needsWork": "Needs Work",
+        "poor": "Poor",
+        "critical": "Critical"
+      }
+    },
+    "meta": {
+      "title": "Meta Tags",
+      "pageTitle": "Page Title",
+      "description": "Meta Description",
+      "canonical": "Canonical URL",
+      "robots": "Robots",
+      "viewport": "Viewport",
+      "openGraph": "Open Graph",
+      "twitterCard": "Twitter Card",
+      "chars": "chars",
+      "missing": "Missing",
+      "notSet": "Not set"
+    },
+    "headings": {
+      "title": "Headings",
+      "h1Count": "H1 Tags",
+      "total": "Total",
+      "hierarchy": "Hierarchy",
+      "proper": "Proper",
+      "hasGaps": "Has gaps",
+      "empty": "(empty)",
+      "noHeadings": "No headings found on this page."
+    },
+    "content": {
+      "title": "Content Analysis",
+      "words": "Words",
+      "readTime": "Read Time",
+      "minutes": "min",
+      "paragraphs": "Paragraphs",
+      "sentences": "sentences",
+      "textHtmlRatio": "Text/HTML",
+      "avgWords": "Avg. words per sentence",
+      "goodLength": "Good length",
+      "shortContent": "Consider adding more content",
+      "optimal": "Optimal ratio",
+      "lowRatio": "Low text ratio"
+    },
+    "keywords": {
+      "title": "Keywords",
+      "totalWords": "Total Words",
+      "uniqueWords": "Unique Words",
+      "topKeywords": "Top Keywords",
+      "consistency": "Keyword Consistency",
+      "inTitle": "In Title",
+      "inDescription": "In Description",
+      "inH1": "In H1",
+      "noMatch": "No matches",
+      "cloud": "Keyword Cloud",
+      "noKeywords": "No keywords found",
+      "cloudDescription": "Word size represents frequency. Hover for details."
+    },
+    "images": {
+      "title": "Images",
+      "total": "Total Images",
+      "missingAlt": "Missing Alt",
+      "lazyLoading": "Lazy Loading",
+      "formats": "Formats",
+      "issues": "Images with Issues",
+      "noSrc": "No source",
+      "noImages": "No images found on this page."
+    },
+    "links": {
+      "title": "Links",
+      "total": "Total Links",
+      "internal": "Internal",
+      "external": "External",
+      "nofollow": "Nofollow",
+      "issues": "Links with Issues",
+      "emptyText": "(no text)",
+      "noLinks": "No links found on this page."
+    },
+    "technical": {
+      "title": "Technical SEO",
+      "secure": "Secure connection",
+      "notSecure": "Not secure",
+      "present": "Present",
+      "missing": "Missing",
+      "notSet": "Not set",
+      "notFound": "Not found",
+      "charset": "Character Set",
+      "viewport": "Viewport",
+      "canonical": "Canonical",
+      "language": "Language",
+      "urlLength": "URL Length"
+    },
+    "performance": {
+      "title": "Performance",
+      "htmlSize": "HTML Size",
+      "domElements": "DOM Elements",
+      "domDepth": "DOM Depth",
+      "blocking": "Blocking",
+      "resources": "resources",
+      "levels": "levels",
+      "scripts": "Scripts",
+      "stylesheets": "Stylesheets",
+      "inlineScripts": "Inline Scripts",
+      "inlineStyles": "Inline Styles",
+      "good": "Good size",
+      "large": "Consider optimizing",
+      "optimal": "Optimal",
+      "complex": "Complex DOM"
+    },
+    "previews": {
+      "title": "Social Previews",
+      "serp": {
+        "title": "Google Search Preview",
+        "desktop": "Desktop",
+        "mobile": "Mobile",
+        "noTitle": "No title set",
+        "noDescription": "No meta description set. Add a description to improve click-through rates."
+      },
+      "facebook": {
+        "title": "Facebook Preview",
+        "noTitle": "No title set",
+        "noDescription": "No description available",
+        "noImage": "No og:image set",
+        "imageSet": "Set",
+        "imageMissing": "Missing",
+        "recommended": "Recommended size"
+      },
+      "twitter": {
+        "title": "X (Twitter) Preview",
+        "noTitle": "No title set",
+        "noImage": "No image set",
+        "recommended": "Recommended size"
+      }
+    },
+    "export": {
+      "title": "Export Report",
+      "pdf": "Download PDF",
+      "json": "Download JSON",
+      "csv": "Download CSV",
+      "generating": "Generating..."
+    },
+    "checklist": {
+      "title": "SEO Checklist",
+      "critical": "Critical",
+      "important": "Important",
+      "optional": "Optional",
+      "completed": "completed",
+      "pending": "pending"
+    },
+    "readingLevel": {
+      "title": "Reading Level",
+      "score": "Reading Ease",
+      "gradeLevel": "Grade Level",
+      "gradeLabel": "US Grade",
+      "audience": "Target Audience",
+      "audienceLabel": "Reading level",
+      "avgSyllables": "Avg syllables/word",
+      "avgWords": "Avg words/sentence",
+      "recommendation": "For web content, aim for a Flesch Reading Ease score of 60-70 (8th-9th grade level) to reach the widest audience.",
+      "labels": {
+        "veryEasy": "Very Easy",
+        "easy": "Easy",
+        "fairlyEasy": "Fairly Easy",
+        "standard": "Standard",
+        "fairlyDifficult": "Fairly Difficult",
+        "difficult": "Difficult",
+        "veryDifficult": "Very Difficult"
+      },
+      "audiences": {
+        "grade5": "5th grade",
+        "grade6": "6th grade",
+        "grade7": "7th grade",
+        "grade8to9": "8th-9th grade",
+        "grade10to12": "10th-12th grade",
+        "college": "College",
+        "collegeGraduate": "College graduate"
+      }
+    },
+    "comparison": {
+      "title": "Compare URLs",
+      "url1": "URL 1",
+      "url2": "URL 2",
+      "compare": "Compare",
+      "analyzing": "Analyzing...",
+      "metric": "Metric",
+      "overallScore": "Overall Score"
+    },
+    "resourceHints": {
+      "title": "Resource Hints",
+      "optimized": "Optimized",
+      "notOptimized": "Not using resource hints",
+      "preload": "Preload",
+      "prefetch": "Prefetch",
+      "preconnect": "Preconnect",
+      "dnsPrefetch": "DNS Prefetch",
+      "none": "None detected",
+      "description": "Resource hints help browsers prioritize loading critical resources for better performance."
+    },
+    "socialAnalytics": {
+      "title": "Analytics & Frameworks",
+      "analytics": "Analytics Tools",
+      "frameworks": "JS Frameworks",
+      "socialLinks": "Social Media Links",
+      "noFrameworks": "No frameworks detected",
+      "noSocialLinks": "No social media links found"
+    },
+    "anchorText": {
+      "title": "Anchor Text Analysis",
+      "total": "Total Links",
+      "descriptive": "Descriptive",
+      "generic": "Generic",
+      "overOptimized": "Over-optimized",
+      "quality": "Anchor Text Quality",
+      "genericFound": "Generic texts found",
+      "description": "Descriptive anchor texts help search engines understand link context. Avoid generic phrases like 'click here'."
+    },
+    "mobile": {
+      "title": "Mobile Responsiveness",
+      "viewport": "Viewport",
+      "responsiveImages": "Srcset Images",
+      "pictureElements": "Picture Elements",
+      "mediaQueries": "Media Queries",
+      "viewportContent": "Viewport Content",
+      "responsiveImagesCheck": "Responsive images (srcset/picture)",
+      "fontSizes": "Mobile-friendly font sizes",
+      "touchTargets": "Touch target sizes (44px+)",
+      "issues": "Issues Found"
+    },
+    "schema": {
+      "title": "Structured Data (Schema.org)",
+      "noSchema": "No structured data found",
+      "recommendation": "Consider adding JSON-LD structured data to enable rich snippets in search results.",
+      "richSnippetPreview": "Rich Snippet Preview",
+      "untitled": "Untitled",
+      "reviews": "reviews",
+      "viewRawJson": "View raw JSON-LD"
+    },
+    "robotsTxt": {
+      "title": "Robots.txt & Sitemap",
+      "robotsFile": "Robots.txt",
+      "sitemap": "Sitemap",
+      "found": "Found",
+      "notFound": "Not found",
+      "userAgents": "User Agents",
+      "directives": "Directives",
+      "allowed": "Allowed",
+      "disallowed": "Disallowed",
+      "crawlDelay": "Crawl Delay",
+      "sitemapsFound": "Sitemaps Found",
+      "sitemapIndex": "Sitemap Index",
+      "xmlSitemap": "XML Sitemap",
+      "fromRobots": "From robots.txt",
+      "defaultLocation": "Default location",
+      "issues": "Issues",
+      "noIssues": "No issues detected",
+      "viewContent": "View Content",
+      "seconds": "seconds",
+      "description": "Robots.txt controls crawler access. Sitemaps help search engines discover pages."
+    },
+    "security": {
+      "title": "Security Analysis",
+      "https": {
+        "title": "HTTPS",
+        "secure": "Secure connection",
+        "notSecure": "Not secure",
+        "mixedContent": "Mixed Content",
+        "mixedContentFound": "{count} mixed content resource(s) found",
+        "noMixedContent": "No mixed content",
+        "upgradeInsecure": "Upgrade Insecure Requests",
+        "present": "Present",
+        "missing": "Missing"
+      },
+      "headers": {
+        "title": "Security Headers",
+        "corsBlocked": "Headers could not be verified due to CORS restrictions",
+        "corsNote": "This doesn't mean headers are missing, just that they're not accessible from the browser.",
+        "critical": "Critical",
+        "recommended": "Recommended",
+        "optional": "Optional"
+      },
+      "forms": {
+        "title": "Form Security",
+        "totalForms": "Total Forms",
+        "withHttps": "Using HTTPS",
+        "withCSRF": "CSRF Protected",
+        "sensitiveData": "With Sensitive Data",
+        "criticalIssues": "Critical Issues",
+        "noForms": "No forms found on this page",
+        "csrfProtection": "CSRF Protection",
+        "captcha": "CAPTCHA"
+      },
+      "score": "Security Score",
+      "issues": "Security Issues",
+      "noIssues": "No security issues detected",
+      "description": "Security analysis checks HTTPS, security headers, and form protection."
+    },
+    "urlAnalysis": {
+      "title": "URL Analysis",
+      "structure": "URL Structure",
+      "readability": "Readability",
+      "protocol": "Protocol",
+      "hostname": "Hostname",
+      "path": "Path",
+      "depth": "Depth",
+      "length": "Length",
+      "characters": "characters",
+      "levels": "levels",
+      "hasWww": "WWW Prefix",
+      "trailingSlash": "Trailing Slash",
+      "queryParams": "Query Parameters",
+      "score": "URL Score",
+      "issues": "URL Issues",
+      "noIssues": "URL structure is SEO-friendly",
+      "underscores": "Contains underscores",
+      "uppercase": "Contains uppercase",
+      "specialChars": "Special characters",
+      "keywords": "Keywords in URL",
+      "description": "Clean, readable URLs help search engines and users understand page content."
+    },
+    "embeddedContent": {
+      "title": "Embedded Content",
+      "iframes": "Iframes",
+      "videos": "Videos",
+      "audios": "Audio",
+      "total": "Total",
+      "noContent": "No embedded content found",
+      "noSrc": "No src",
+      "hasTitle": "title",
+      "hasControls": "controls",
+      "hasCaptions": "captions",
+      "lazy": "lazy",
+      "missingTitle": "Missing title",
+      "missingControls": "Missing controls",
+      "missingCaptions": "Missing captions",
+      "autoplay": "Autoplay enabled",
+      "lazyLoading": "Lazy loading",
+      "sandbox": "Sandbox",
+      "poster": "Poster image",
+      "responsive": "Responsive",
+      "issues": "Issues",
+      "description": "Embedded content should be accessible and optimized for performance."
+    },
+    "analyzers": {
+      "meta": {
+        "titleLabel": "Title",
+        "descriptionLabel": "Description",
+        "keywordsLabel": "Keywords",
+        "robotsLabel": "Robots",
+        "viewportLabel": "Viewport",
+        "canonicalLabel": "Canonical",
+        "goodLength": "Good length ({length} chars)",
+        "missingTitle": "Missing title tag",
+        "lengthWarning": "Length {length} chars (optimal: {min}-{max})",
+        "missingDescription": "Missing meta description",
+        "keywordsDeprecated": "Meta keywords are deprecated since 2009",
+        "keywordsNotSet": "Not set (not required)",
+        "robotsDefault": "index, follow (default)",
+        "robotsNoindex": "Page is set to noindex",
+        "missingViewport": "Missing viewport meta tag",
+        "canonicalMatches": "Canonical matches current URL",
+        "canonicalDiffers": "Canonical differs from current URL",
+        "canonicalMissing": "No canonical URL specified"
+      },
+      "headings": {
+        "skippedLevel": "Skipped heading level (H{prev} → H{next})",
+        "emptyHeading": "Empty heading",
+        "missingH1": "Missing H1 tag",
+        "multipleH1": "Multiple H1 tags found ({count})",
+        "hierarchyGaps": "Heading hierarchy has gaps"
+      },
+      "images": {
+        "missingAlt": "Missing alt attribute",
+        "genericFilename": "Generic filename detected"
+      },
+      "links": {
+        "nonDescriptive": "Non-descriptive anchor text",
+        "emptyAnchor": "Empty anchor text"
+      },
+      "anchorText": {
+        "tooManyGeneric": "Too many generic anchor texts like \"click here\" or \"read more\"",
+        "tooLong": "Some anchor texts are too long and may be over-optimized"
+      },
+      "mobile": {
+        "missingViewport": "Missing viewport meta tag - essential for mobile responsiveness",
+        "noResponsiveImages": "No responsive images found (srcset or picture elements)",
+        "smallFonts": "{count} element(s) with font size smaller than 14px",
+        "smallTouchTargets": "{count} interactive element(s) may have small touch targets",
+        "noMediaQueries": "No CSS media queries detected"
+      }
+    },
+    "resourceOptimization": {
+      "title": "Resource Optimization",
+      "minification": "Minification",
+      "scripts": "Scripts",
+      "stylesheets": "Stylesheets",
+      "minified": "Minified",
+      "notMinified": "Not minified",
+      "printStyles": "Print Styles",
+      "hasPrintStyles": "Print styles detected",
+      "noPrintStyles": "No print styles",
+      "printMediaQueries": "Print media queries",
+      "description": "Minified resources load faster and improve page performance."
+    },
+    "rendering": {
+      "title": "Rendering Analysis",
+      "type": "Rendering Type",
+      "ssr": "Server-Side Rendered",
+      "csr": "Client-Side Rendered",
+      "hybrid": "Hybrid (SSR + Hydration)",
+      "static": "Static HTML",
+      "unknown": "Unknown",
+      "confidence": "Confidence",
+      "indicators": "Detection Indicators",
+      "noscriptFallback": "Noscript Fallback",
+      "hydrationMarkers": "Hydration Markers",
+      "description": "Server-side rendering improves SEO by providing crawlable content."
+    },
+    "lazyContent": {
+      "title": "Lazy Loading & Infinite Scroll",
+      "infiniteScroll": "Infinite Scroll",
+      "detected": "Detected",
+      "notDetected": "Not detected",
+      "lazyImages": "Lazy Images",
+      "lazyIframes": "Lazy Iframes",
+      "pagination": "Pagination",
+      "hasPagination": "Pagination links found",
+      "noPagination": "No pagination",
+      "patterns": "Detected Patterns",
+      "recommendations": "Recommendations",
+      "description": "Lazy loading improves performance, but ensure content is crawlable."
+    },
+    "socialShare": {
+      "title": "Social Share Buttons",
+      "detected": "Share buttons detected",
+      "notDetected": "No share buttons found",
+      "platforms": "Platforms",
+      "widgets": "Share Widgets",
+      "nativeApi": "Web Share API",
+      "description": "Social share buttons encourage content sharing and increase visibility."
+    },
+    "accessibility": {
+      "title": "Accessibility (WCAG)",
+      "score": "Accessibility Score",
+      "issues": "Issues",
+      "passed": "Passed Checks",
+      "landmarks": "Landmarks",
+      "aria": "ARIA Usage",
+      "forms": "Form Accessibility",
+      "errors": "Errors",
+      "warnings": "Warnings",
+      "wcagLevel": "WCAG Level",
+      "wcagCriteria": "Criteria",
+      "inputsWithLabels": "Inputs with labels",
+      "inputsTotal": "Total inputs",
+      "description": "Accessibility ensures your content is usable by everyone, including search engine crawlers."
+    },
+    "coreWebVitals": {
+      "title": "Core Web Vitals (Estimated)",
+      "lcp": "LCP (Largest Contentful Paint)",
+      "cls": "CLS (Cumulative Layout Shift)",
+      "fid": "FID (First Input Delay)",
+      "inp": "INP (Interaction to Next Paint)",
+      "good": "Good",
+      "needsImprovement": "Needs Improvement",
+      "poor": "Poor",
+      "unknown": "Unknown",
+      "factors": "Factors",
+      "recommendations": "Recommendations",
+      "largestElement": "Largest Element",
+      "description": "Estimates based on HTML analysis. Use real monitoring tools for accurate measurements."
+    }
+  }
+}

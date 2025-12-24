@@ -1,0 +1,20 @@
+# /path/to/your/site/.htaccess
+
+# turn off MultiViews (can interfere with rewrites)
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Skip rewrites if request already targets the built assets directory
+    RewriteCond %{REQUEST_URI} ^/dist/
+    RewriteRule ^ - [L]
+
+    # Send every other request to the dist/ directory (prevents recursion via the condition above)
+    RewriteRule ^ dist/%{REQUEST_URI} [L]
+
+    # SPA fallback
+    RewriteRule ^ dist/index.html [L]
+
+</IfModule>
