@@ -5,6 +5,7 @@
 import { CWV_SCORE_GOOD, CWV_SCORE_NEEDS_IMPROVEMENT } from '@/constants/seo';
 
 import type { ClsEstimate, ClsFactor } from './types';
+import { t } from '@/utils/i18nHelper';
 
 /**
  * Estimates CLS risk from HTML structure.
@@ -21,15 +22,15 @@ export function estimateCls(doc: Document): ClsEstimate {
 
   if (imagesWithoutDimensions.length > 0) {
     factors.push({
-      factor: 'Images without dimensions',
+      factor: t('seo.coreWebVitals.analyzers.cls.imagesNoDimensions'),
       impact: 'negative',
       count: imagesWithoutDimensions.length,
     });
-    issues.push('Add width and height attributes to images to prevent layout shifts');
+    issues.push(t('seo.coreWebVitals.analyzers.cls.imagesNoDimensionsIssue'));
     score -= imagesWithoutDimensions.length * 5;
   } else {
     factors.push({
-      factor: 'Images with dimensions',
+      factor: t('seo.coreWebVitals.analyzers.cls.imagesWithDimensions'),
       impact: 'positive',
       count: doc.querySelectorAll('img[width][height]').length,
     });
@@ -40,11 +41,11 @@ export function estimateCls(doc: Document): ClsEstimate {
 
   if (iframesWithoutDimensions.length > 0) {
     factors.push({
-      factor: 'Iframes without dimensions',
+      factor: t('seo.coreWebVitals.analyzers.cls.iframesNoDimensions'),
       impact: 'negative',
       count: iframesWithoutDimensions.length,
     });
-    issues.push('Add dimensions to iframes to prevent layout shifts');
+    issues.push(t('seo.coreWebVitals.analyzers.cls.iframesNoDimensionsIssue'));
     score -= iframesWithoutDimensions.length * 8;
   }
 
@@ -62,11 +63,11 @@ export function estimateCls(doc: Document): ClsEstimate {
 
     if (withMinHeight.length < adContainers.length) {
       factors.push({
-        factor: 'Ad containers without reserved space',
+        factor: t('seo.coreWebVitals.analyzers.cls.adContainersNoSpace'),
         impact: 'negative',
         count: adContainers.length - withMinHeight.length,
       });
-      issues.push('Reserve space for ad containers to prevent layout shifts');
+      issues.push(t('seo.coreWebVitals.analyzers.cls.adContainersNoSpaceIssue'));
       score -= 10;
     }
   }
@@ -78,7 +79,7 @@ export function estimateCls(doc: Document): ClsEstimate {
 
   if (dynamicContainers.length > 0) {
     factors.push({
-      factor: 'Dynamic content placeholders',
+      factor: t('seo.coreWebVitals.analyzers.cls.dynamicPlaceholders'),
       impact: 'positive',
       count: dynamicContainers.length,
     });
@@ -94,7 +95,7 @@ export function estimateCls(doc: Document): ClsEstimate {
 
   if (fontDisplaySwap) {
     factors.push({
-      factor: 'Font display swap',
+      factor: t('seo.coreWebVitals.analyzers.cls.fontDisplaySwap'),
       impact: 'positive',
       count: 1,
     });

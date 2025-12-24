@@ -9,6 +9,7 @@ import {
   INLINE_SCRIPT_MIN_SIZE,
   INLINE_STYLE_MIN_SIZE,
 } from '@/constants/seo';
+import { t } from '@/utils/i18nHelper';
 
 export interface ResourceInfo {
   url: string;
@@ -146,7 +147,7 @@ export function analyzeResourceOptimization(
         url: src,
         type: 'script',
         isMinified: isMinifiedByUrl,
-        issues: isMinifiedByUrl ? [] : ['Not minified (based on filename)'],
+        issues: isMinifiedByUrl ? [] : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
       });
     }
   });
@@ -158,7 +159,7 @@ export function analyzeResourceOptimization(
     if (content.length > INLINE_SCRIPT_MIN_SIZE) {
       const minified = isMinified(content);
       if (!minified) {
-        issues.push('Large inline script is not minified');
+        issues.push(t('seo.resourceOptimization.analyzers.largeInlineScriptNotMinified'));
       }
     }
   });
@@ -174,7 +175,7 @@ export function analyzeResourceOptimization(
         url: href,
         type: 'stylesheet',
         isMinified: isMinifiedByUrl,
-        issues: isMinifiedByUrl ? [] : ['Not minified (based on filename)'],
+        issues: isMinifiedByUrl ? [] : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
       });
     }
   });
@@ -186,7 +187,7 @@ export function analyzeResourceOptimization(
     if (content.length > INLINE_STYLE_MIN_SIZE) {
       const minified = isMinified(content);
       if (!minified) {
-        issues.push('Large inline style block is not minified');
+        issues.push(t('seo.resourceOptimization.analyzers.largeInlineStyleNotMinified'));
       }
     }
   });
@@ -205,10 +206,10 @@ export function analyzeResourceOptimization(
   const nonMinifiedStyles = stylesheets.length - minifiedStylesheets;
 
   if (nonMinifiedScripts > 0) {
-    issues.push(`${nonMinifiedScripts} script(s) may not be minified`);
+    issues.push(t('seo.resourceOptimization.analyzers.scriptsNotMinified', { count: nonMinifiedScripts }));
   }
   if (nonMinifiedStyles > 0) {
-    issues.push(`${nonMinifiedStyles} stylesheet(s) may not be minified`);
+    issues.push(t('seo.resourceOptimization.analyzers.stylesheetsNotMinified', { count: nonMinifiedStyles }));
   }
 
   // Determine status

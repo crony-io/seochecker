@@ -11,6 +11,7 @@ import {
 } from '@/constants/seo';
 
 import type { LcpEstimate, LcpFactor } from './types';
+import { t } from '@/utils/i18nHelper';
 
 /**
  * Estimates LCP performance from HTML structure.
@@ -30,9 +31,9 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
   const preloadedImages = doc.querySelectorAll('link[rel="preload"][as="image"]');
   if (preloadedImages.length > 0) {
     factors.push({
-      factor: 'Image preload',
+      factor: t('seo.coreWebVitals.analyzers.lcp.imagePreload'),
       impact: 'positive',
-      description: 'LCP candidate may be preloaded',
+      description: t('seo.coreWebVitals.analyzers.lcp.imagePreloadDesc'),
     });
     score += 10;
   }
@@ -43,11 +44,11 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
 
   if (lazyLoadedFirstImages.length > 0) {
     factors.push({
-      factor: 'Lazy loading above fold',
+      factor: t('seo.coreWebVitals.analyzers.lcp.lazyAboveFold'),
       impact: 'negative',
-      description: 'First images use lazy loading, which may delay LCP',
+      description: t('seo.coreWebVitals.analyzers.lcp.lazyAboveFoldDesc'),
     });
-    issues.push('Consider removing lazy loading from above-the-fold images');
+    issues.push(t('seo.coreWebVitals.analyzers.lcp.lazyAboveFoldIssue'));
     score -= 15;
   }
 
@@ -55,9 +56,9 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
   const highPriorityImages = doc.querySelectorAll('img[fetchpriority="high"]');
   if (highPriorityImages.length > 0) {
     factors.push({
-      factor: 'Fetch priority',
+      factor: t('seo.coreWebVitals.analyzers.lcp.fetchPriority'),
       impact: 'positive',
-      description: 'High priority set on important images',
+      description: t('seo.coreWebVitals.analyzers.lcp.fetchPriorityDesc'),
     });
     score += 10;
   }
@@ -70,21 +71,21 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
 
   if (blockingStyles.length > BLOCKING_STYLESHEETS_MAX) {
     factors.push({
-      factor: 'Blocking stylesheets',
+      factor: t('seo.coreWebVitals.analyzers.lcp.blockingStylesheets'),
       impact: 'negative',
-      description: `${blockingStyles.length} render-blocking stylesheets`,
+      description: t('seo.coreWebVitals.analyzers.lcp.blockingStylesheetsDesc', { count: blockingStyles.length }),
     });
-    issues.push('Consider reducing or deferring non-critical CSS');
+    issues.push(t('seo.coreWebVitals.analyzers.lcp.blockingStylesheetsIssue'));
     score -= blockingStyles.length * 3;
   }
 
   if (blockingScripts.length > BLOCKING_SCRIPTS_MAX) {
     factors.push({
-      factor: 'Blocking scripts',
+      factor: t('seo.coreWebVitals.analyzers.lcp.blockingScripts'),
       impact: 'negative',
-      description: `${blockingScripts.length} render-blocking scripts`,
+      description: t('seo.coreWebVitals.analyzers.lcp.blockingScriptsDesc', { count: blockingScripts.length }),
     });
-    issues.push('Add async or defer to non-critical scripts');
+    issues.push(t('seo.coreWebVitals.analyzers.lcp.blockingScriptsIssue'));
     score -= blockingScripts.length * 5;
   }
 
@@ -95,9 +96,9 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
     const content = firstStyle.textContent || '';
     if (content.length > 500 && content.length < 15000) {
       factors.push({
-        factor: 'Inline critical CSS',
+        factor: t('seo.coreWebVitals.analyzers.lcp.inlineCriticalCss'),
         impact: 'positive',
-        description: 'Critical CSS appears to be inlined',
+        description: t('seo.coreWebVitals.analyzers.lcp.inlineCriticalCssDesc'),
       });
       score += 5;
     }
@@ -106,11 +107,11 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
   // Check for large HTML size
   if (html.length > HTML_SIZE_LARGE) {
     factors.push({
-      factor: 'Large HTML',
+      factor: t('seo.coreWebVitals.analyzers.lcp.largeHtml'),
       impact: 'negative',
-      description: 'HTML size may delay rendering',
+      description: t('seo.coreWebVitals.analyzers.lcp.largeHtmlDesc'),
     });
-    issues.push('Consider reducing HTML size');
+    issues.push(t('seo.coreWebVitals.analyzers.lcp.largeHtmlIssue'));
     score -= 10;
   }
 

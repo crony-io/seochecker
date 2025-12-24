@@ -5,6 +5,7 @@
 import { EXTERNAL_SCRIPTS_MAX, INLINE_SCRIPT_SIZE_MAX } from '@/constants/seo';
 
 import type { FidEstimate, InpEstimate } from './types';
+import { t } from '@/utils/i18nHelper';
 
 /** Combined result for interactivity metrics */
 export interface InteractivityEstimate {
@@ -33,14 +34,14 @@ export function estimateInteractivity(doc: Document, html: string): Interactivit
   });
 
   if (scripts.length > EXTERNAL_SCRIPTS_MAX) {
-    fidFactors.push(`${scripts.length} external scripts`);
-    fidIssues.push('Consider reducing number of external scripts');
+    fidFactors.push(t('seo.coreWebVitals.analyzers.fid.externalScripts', { count: scripts.length }));
+    fidIssues.push(t('seo.coreWebVitals.analyzers.fid.externalScriptsIssue'));
     fidScore -= 15;
   }
 
   if (totalInlineScriptSize > INLINE_SCRIPT_SIZE_MAX) {
-    fidFactors.push('Large inline JavaScript');
-    fidIssues.push('Consider moving inline scripts to external files');
+    fidFactors.push(t('seo.coreWebVitals.analyzers.fid.largeInlineJs'));
+    fidIssues.push(t('seo.coreWebVitals.analyzers.fid.largeInlineJsIssue'));
     fidScore -= 10;
   }
 
@@ -49,14 +50,14 @@ export function estimateInteractivity(doc: Document, html: string): Interactivit
   const deferScripts = doc.querySelectorAll('script[defer]');
 
   if (asyncScripts.length > 0 || deferScripts.length > 0) {
-    fidFactors.push('Using async/defer scripts');
+    fidFactors.push(t('seo.coreWebVitals.analyzers.fid.asyncDeferScripts'));
     fidScore += 10;
   }
 
   // Check for heavy event listeners patterns
   if (/addEventListener\s*\([^)]*scroll/gi.test(html)) {
-    inpFactors.push('Scroll event listeners detected');
-    inpIssues.push('Ensure scroll handlers are debounced/throttled');
+    inpFactors.push(t('seo.coreWebVitals.analyzers.inp.scrollListeners'));
+    inpIssues.push(t('seo.coreWebVitals.analyzers.inp.scrollListenersIssue'));
     inpScore -= 5;
   }
 
@@ -76,7 +77,7 @@ export function estimateInteractivity(doc: Document, html: string): Interactivit
 
   // Check for Web Workers usage (positive)
   if (/new Worker\(/i.test(html)) {
-    fidFactors.push('Web Workers detected (good for offloading work)');
+    fidFactors.push(t('seo.coreWebVitals.analyzers.fid.webWorkers'));
     fidScore += 10;
   }
 

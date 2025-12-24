@@ -565,7 +565,18 @@
         "noUpgradeInsecure": "No upgrade-insecure-requests directive",
         "formInsecure": "Form {id} submits to insecure HTTP URL",
         "formNoHttps": "Form {id} with sensitive data doesn't use HTTPS action",
-        "formNoProtection": "Form {id} with password field lacks CSRF protection"
+        "formNoProtection": "Form {id} with password field lacks CSRF protection",
+        "corsBlocked": "Headers could not be verified due to CORS restrictions",
+        "criticalHeadersMissing": "{count} critical security header(s) missing",
+        "recommendedHeadersMissing": "{count} recommended security header(s) missing",
+        "cspUnsafeInline": "Uses 'unsafe-inline' - consider using nonces or hashes",
+        "cspUnsafeEval": "Uses 'unsafe-eval' - potential security risk",
+        "recommendCsp": "Implement CSP to prevent XSS and injection attacks",
+        "recommendHsts": "Add HSTS to force HTTPS (e.g., max-age=31536000; includeSubDomains)",
+        "recommendXFrameOptions": "Add X-Frame-Options: DENY or SAMEORIGIN to prevent clickjacking",
+        "recommendXContentType": "Add X-Content-Type-Options: nosniff",
+        "recommendReferrerPolicy": "Add Referrer-Policy: strict-origin-when-cross-origin",
+        "recommendPermissionsPolicy": "Add Permissions-Policy to control browser features"
       },
       "headers": {
         "title": "Security Headers",
@@ -723,7 +734,14 @@
       "hasPrintStyles": "Print styles detected",
       "noPrintStyles": "No print styles",
       "printMediaQueries": "Print media queries",
-      "description": "Minified resources load faster and improve page performance."
+      "description": "Minified resources load faster and improve page performance.",
+      "analyzers": {
+        "notMinifiedFilename": "Not minified (based on filename)",
+        "largeInlineScriptNotMinified": "Large inline script is not minified",
+        "largeInlineStyleNotMinified": "Large inline style block is not minified",
+        "scriptsNotMinified": "{count} script(s) may not be minified",
+        "stylesheetsNotMinified": "{count} stylesheet(s) may not be minified"
+      }
     },
     "rendering": {
       "title": "Rendering Analysis",
@@ -737,7 +755,16 @@
       "indicators": "Detection Indicators",
       "noscriptFallback": "Noscript Fallback",
       "hydrationMarkers": "Hydration Markers",
-      "description": "Server-side rendering improves SEO by providing crawlable content."
+      "description": "Server-side rendering improves SEO by providing crawlable content.",
+      "analyzers": {
+        "substantialContent": "Substantial text content in HTML",
+        "emptyContainer": "Empty application container detected",
+        "csrWarning": "Page appears to be client-side rendered - content may not be indexed by search engines",
+        "ssrWithHydration": "{name} detected (likely SSR with hydration)",
+        "meaningfulNoscript": "Has meaningful noscript fallback",
+        "properHeadings": "Proper heading structure in initial HTML",
+        "noNoscriptFallback": "No noscript fallback for JavaScript-disabled users/crawlers"
+      }
     },
     "lazyContent": {
       "title": "Lazy Loading & Infinite Scroll",
@@ -751,7 +778,15 @@
       "noPagination": "No pagination",
       "patterns": "Detected Patterns",
       "recommendations": "Recommendations",
-      "description": "Lazy loading improves performance, but ensure content is crawlable."
+      "description": "Lazy loading improves performance, but ensure content is crawlable.",
+      "analyzers": {
+        "infiniteScrollDataAttrs": "Infinite scroll data attributes/classes",
+        "infiniteScrollNoPagination": "Infinite scroll detected without pagination fallback",
+        "infiniteScrollSeoRecommendation": "Add paginated URLs for infinite scroll content to ensure search engines can crawl all content",
+        "infiniteScrollAccessibility": "Ensure infinite scroll content is accessible via direct URLs for SEO",
+        "considerLazyImages": "Consider adding lazy loading to images below the fold for better performance",
+        "useNativeLazy": "Consider using native loading=\"lazy\" attribute for better browser support"
+      }
     },
     "socialShare": {
       "title": "Social Share Buttons",
@@ -760,7 +795,12 @@
       "platforms": "Platforms",
       "widgets": "Share Widgets",
       "nativeApi": "Web Share API",
-      "description": "Social share buttons encourage content sharing and increase visibility."
+      "description": "Social share buttons encourage content sharing and increase visibility.",
+      "analyzers": {
+        "noShareButtons": "No social share buttons detected",
+        "fewShareOptions": "Consider adding more social sharing options",
+        "missingMainPlatforms": "Missing Facebook or Twitter/X share buttons"
+      }
     },
     "accessibility": {
       "title": "Accessibility (WCAG)",
@@ -791,7 +831,52 @@
       "factors": "Factors",
       "recommendations": "Recommendations",
       "largestElement": "Largest Element",
-      "description": "Estimates based on HTML analysis. Use real monitoring tools for accurate measurements."
+      "description": "Estimates based on HTML analysis. Use real monitoring tools for accurate measurements.",
+      "analyzers": {
+        "lcp": {
+          "imagePreload": "Image preload",
+          "imagePreloadDesc": "LCP candidate may be preloaded",
+          "lazyAboveFold": "Lazy loading above fold",
+          "lazyAboveFoldDesc": "First images use lazy loading, which may delay LCP",
+          "lazyAboveFoldIssue": "Consider removing lazy loading from above-the-fold images",
+          "fetchPriority": "Fetch priority",
+          "fetchPriorityDesc": "High priority set on important images",
+          "blockingStylesheets": "Blocking stylesheets",
+          "blockingStylesheetsDesc": "{count} render-blocking stylesheets",
+          "blockingStylesheetsIssue": "Consider reducing or deferring non-critical CSS",
+          "blockingScripts": "Blocking scripts",
+          "blockingScriptsDesc": "{count} render-blocking scripts",
+          "blockingScriptsIssue": "Add async or defer to non-critical scripts",
+          "inlineCriticalCss": "Inline critical CSS",
+          "inlineCriticalCssDesc": "Critical CSS appears to be inlined",
+          "largeHtml": "Large HTML",
+          "largeHtmlDesc": "HTML size may delay rendering",
+          "largeHtmlIssue": "Consider reducing HTML size"
+        },
+        "cls": {
+          "imagesNoDimensions": "Images without dimensions",
+          "imagesWithDimensions": "Images with dimensions",
+          "imagesNoDimensionsIssue": "Add width and height attributes to images to prevent layout shifts",
+          "iframesNoDimensions": "Iframes without dimensions",
+          "iframesNoDimensionsIssue": "Add dimensions to iframes to prevent layout shifts",
+          "adContainersNoSpace": "Ad containers without reserved space",
+          "adContainersNoSpaceIssue": "Reserve space for ad containers to prevent layout shifts",
+          "dynamicPlaceholders": "Dynamic content placeholders",
+          "fontDisplaySwap": "Font display swap"
+        },
+        "fid": {
+          "externalScripts": "{count} external scripts",
+          "externalScriptsIssue": "Consider reducing number of external scripts",
+          "largeInlineJs": "Large inline JavaScript",
+          "largeInlineJsIssue": "Consider moving inline scripts to external files",
+          "asyncDeferScripts": "Using async/defer scripts",
+          "webWorkers": "Web Workers detected (good for offloading work)"
+        },
+        "inp": {
+          "scrollListeners": "Scroll event listeners detected",
+          "scrollListenersIssue": "Ensure scroll handlers are debounced/throttled"
+        }
+      }
     }
   }
 }

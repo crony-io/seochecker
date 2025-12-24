@@ -3,6 +3,7 @@
  */
 
 import type { SeoStatus } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 export interface SocialShareAnalysis {
   hasShareButtons: boolean;
@@ -135,12 +136,12 @@ export function analyzeSocialShare(doc: Document, html: string): SocialShareAnal
 
   // Generate issues/recommendations
   if (!hasShareButtons) {
-    issues.push('No social share buttons detected');
+    issues.push(t('seo.socialShare.analyzers.noShareButtons'));
   }
 
   const detectedPlatforms = platforms.filter((p) => p.detected);
   if (detectedPlatforms.length > 0 && detectedPlatforms.length < 3) {
-    issues.push('Consider adding more social sharing options');
+    issues.push(t('seo.socialShare.analyzers.fewShareOptions'));
   }
 
   // Check if Facebook and Twitter are present (most important)
@@ -148,7 +149,7 @@ export function analyzeSocialShare(doc: Document, html: string): SocialShareAnal
   const hasTwitter = platforms.find((p) => p.platform === 'Twitter/X')?.detected;
 
   if (hasShareButtons && !hasFacebook && !hasTwitter) {
-    issues.push('Missing Facebook or Twitter/X share buttons');
+    issues.push(t('seo.socialShare.analyzers.missingMainPlatforms'));
   }
 
   // Determine status

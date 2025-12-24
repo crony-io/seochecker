@@ -252,10 +252,10 @@ function analyzeCSP(csp: string): CspAnalysis {
 
   const warnings: string[] = [];
   if (hasUnsafeInline) {
-    warnings.push("Uses 'unsafe-inline' - consider using nonces or hashes");
+    warnings.push(t('seo.security.analyzers.cspUnsafeInline'));
   }
   if (hasUnsafeEval) {
-    warnings.push("Uses 'unsafe-eval' - potential security risk");
+    warnings.push(t('seo.security.analyzers.cspUnsafeEval'));
   }
 
   return {
@@ -322,22 +322,22 @@ export async function analyzeSecurityHeaders(url: string): Promise<SecurityHeade
     if (!h.present) {
       switch (h.header) {
         case 'Content-Security-Policy':
-          h.recommendation = 'Implement CSP to prevent XSS and injection attacks';
+          h.recommendation = t('seo.security.analyzers.recommendCsp');
           break;
         case 'Strict-Transport-Security':
-          h.recommendation = 'Add HSTS to force HTTPS (e.g., max-age=31536000; includeSubDomains)';
+          h.recommendation = t('seo.security.analyzers.recommendHsts');
           break;
         case 'X-Frame-Options':
-          h.recommendation = 'Add X-Frame-Options: DENY or SAMEORIGIN to prevent clickjacking';
+          h.recommendation = t('seo.security.analyzers.recommendXFrameOptions');
           break;
         case 'X-Content-Type-Options':
-          h.recommendation = 'Add X-Content-Type-Options: nosniff';
+          h.recommendation = t('seo.security.analyzers.recommendXContentType');
           break;
         case 'Referrer-Policy':
-          h.recommendation = 'Add Referrer-Policy: strict-origin-when-cross-origin';
+          h.recommendation = t('seo.security.analyzers.recommendReferrerPolicy');
           break;
         case 'Permissions-Policy':
-          h.recommendation = 'Add Permissions-Policy to control browser features';
+          h.recommendation = t('seo.security.analyzers.recommendPermissionsPolicy');
           break;
       }
     }
@@ -345,16 +345,16 @@ export async function analyzeSecurityHeaders(url: string): Promise<SecurityHeade
 
   const issues: string[] = [];
   if (corsBlocked) {
-    issues.push('Headers could not be verified due to CORS restrictions');
+    issues.push(t('seo.security.analyzers.corsBlocked'));
   } else {
     const missingHigh = headers.filter((h) => !h.present && h.severity === 'high');
     const missingMedium = headers.filter((h) => !h.present && h.severity === 'medium');
 
     if (missingHigh.length > 0) {
-      issues.push(`${missingHigh.length} critical security header(s) missing`);
+      issues.push(t('seo.security.analyzers.criticalHeadersMissing', { count: missingHigh.length }));
     }
     if (missingMedium.length > 0) {
-      issues.push(`${missingMedium.length} recommended security header(s) missing`);
+      issues.push(t('seo.security.analyzers.recommendedHeadersMissing', { count: missingMedium.length }));
     }
   }
 

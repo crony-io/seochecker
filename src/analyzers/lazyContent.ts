@@ -3,6 +3,7 @@
  */
 
 import type { SeoStatus } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 export interface LazyContentAnalysis {
   hasInfiniteScroll: boolean;
@@ -67,7 +68,7 @@ export function analyzeLazyContent(doc: Document, html: string): LazyContentAnal
     '[data-infinite], [data-infinite-scroll], .infinite-scroll, .load-more, [data-load-more]',
   );
   if (infiniteElements.length > 0) {
-    infiniteScrollPatterns.push('Infinite scroll data attributes/classes');
+    infiniteScrollPatterns.push(t('seo.lazyContent.analyzers.infiniteScrollDataAttrs'));
   }
 
   const hasInfiniteScroll = infiniteScrollPatterns.length > 0;
@@ -118,25 +119,25 @@ export function analyzeLazyContent(doc: Document, html: string): LazyContentAnal
 
   // Generate issues and recommendations
   if (hasInfiniteScroll && !hasPagination) {
-    issues.push('Infinite scroll detected without pagination fallback');
+    issues.push(t('seo.lazyContent.analyzers.infiniteScrollNoPagination'));
     recommendations.push(
-      'Add paginated URLs for infinite scroll content to ensure search engines can crawl all content',
+      t('seo.lazyContent.analyzers.infiniteScrollSeoRecommendation'),
     );
   }
 
   if (hasInfiniteScroll) {
-    recommendations.push('Ensure infinite scroll content is accessible via direct URLs for SEO');
+    recommendations.push(t('seo.lazyContent.analyzers.infiniteScrollAccessibility'));
   }
 
   if (!hasLazyImages && doc.querySelectorAll('img').length > 5) {
     recommendations.push(
-      'Consider adding lazy loading to images below the fold for better performance',
+      t('seo.lazyContent.analyzers.considerLazyImages'),
     );
   }
 
   if (nativeLazyImages.length < lazyImageCount && lazyImageCount > 0) {
     recommendations.push(
-      'Consider using native loading="lazy" attribute for better browser support',
+      t('seo.lazyContent.analyzers.useNativeLazy'),
     );
   }
 

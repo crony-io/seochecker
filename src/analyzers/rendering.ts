@@ -4,6 +4,7 @@
 
 import type { SeoStatus } from '@/types/seo';
 import { SUBSTANTIAL_CONTENT_LENGTH, NOSCRIPT_MIN_LENGTH } from '@/constants/seo';
+import { t } from '@/utils/i18nHelper';
 
 export interface RenderingAnalysis {
   renderingType: 'ssr' | 'csr' | 'hybrid' | 'static' | 'unknown';
@@ -71,7 +72,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
     ssrScore += 3;
     indicators.push({
       type: 'ssr',
-      indicator: 'Substantial text content in HTML',
+      indicator: t('seo.rendering.analyzers.substantialContent'),
       weight: 3,
     });
   }
@@ -84,11 +85,11 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
     csrScore += 5;
     indicators.push({
       type: 'csr',
-      indicator: 'Empty application container detected',
+      indicator: t('seo.rendering.analyzers.emptyContainer'),
       weight: 5,
     });
     issues.push(
-      'Page appears to be client-side rendered - content may not be indexed by search engines',
+      t('seo.rendering.analyzers.csrWarning'),
     );
   }
 
@@ -113,7 +114,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
       ssrScore += 1;
       indicators.push({
         type: 'ssr',
-        indicator: `${name} detected (likely SSR with hydration)`,
+        indicator: t('seo.rendering.analyzers.ssrWithHydration', { name }),
         weight: 1,
       });
     }
@@ -146,7 +147,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
       ssrScore += 1;
       indicators.push({
         type: 'ssr',
-        indicator: 'Has meaningful noscript fallback',
+        indicator: t('seo.rendering.analyzers.meaningfulNoscript'),
         weight: 1,
       });
     }
@@ -158,7 +159,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
     ssrScore += 1;
     indicators.push({
       type: 'ssr',
-      indicator: 'Proper heading structure in initial HTML',
+      indicator: t('seo.rendering.analyzers.properHeadings'),
       weight: 1,
     });
   }
@@ -189,7 +190,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
   if (renderingType === 'csr') {
     status = 'warning';
     if (!hasNoscriptFallback) {
-      issues.push('No noscript fallback for JavaScript-disabled users/crawlers');
+      issues.push(t('seo.rendering.analyzers.noNoscriptFallback'));
       status = 'error';
     }
   } else if (renderingType === 'unknown') {

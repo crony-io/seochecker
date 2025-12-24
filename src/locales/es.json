@@ -565,7 +565,18 @@
         "noUpgradeInsecure": "Sin directiva upgrade-insecure-requests",
         "formInsecure": "El formulario {id} envía a URL HTTP insegura",
         "formNoHttps": "El formulario {id} con datos sensibles no usa acción HTTPS",
-        "formNoProtection": "El formulario {id} con campo de contraseña carece de protección CSRF"
+        "formNoProtection": "El formulario {id} con campo de contraseña carece de protección CSRF",
+        "corsBlocked": "Los headers no pudieron verificarse debido a restricciones CORS",
+        "criticalHeadersMissing": "{count} header(s) de seguridad crítico(s) faltante(s)",
+        "recommendedHeadersMissing": "{count} header(s) de seguridad recomendado(s) faltante(s)",
+        "cspUnsafeInline": "Usa 'unsafe-inline' - considera usar nonces o hashes",
+        "cspUnsafeEval": "Usa 'unsafe-eval' - riesgo potencial de seguridad",
+        "recommendCsp": "Implementa CSP para prevenir ataques XSS e inyección",
+        "recommendHsts": "Agrega HSTS para forzar HTTPS (ej., max-age=31536000; includeSubDomains)",
+        "recommendXFrameOptions": "Agrega X-Frame-Options: DENY o SAMEORIGIN para prevenir clickjacking",
+        "recommendXContentType": "Agrega X-Content-Type-Options: nosniff",
+        "recommendReferrerPolicy": "Agrega Referrer-Policy: strict-origin-when-cross-origin",
+        "recommendPermissionsPolicy": "Agrega Permissions-Policy para controlar funciones del navegador"
       },
       "headers": {
         "title": "Headers de Seguridad",
@@ -723,7 +734,14 @@
       "hasPrintStyles": "Estilos de impresión detectados",
       "noPrintStyles": "Sin estilos de impresión",
       "printMediaQueries": "Media queries de impresión",
-      "description": "Los recursos minificados cargan más rápido y mejoran el rendimiento."
+      "description": "Los recursos minificados cargan más rápido y mejoran el rendimiento.",
+      "analyzers": {
+        "notMinifiedFilename": "No minificado (según nombre de archivo)",
+        "largeInlineScriptNotMinified": "El script inline grande no está minificado",
+        "largeInlineStyleNotMinified": "El bloque de estilos inline grande no está minificado",
+        "scriptsNotMinified": "{count} script(s) pueden no estar minificados",
+        "stylesheetsNotMinified": "{count} hoja(s) de estilo pueden no estar minificadas"
+      }
     },
     "rendering": {
       "title": "Análisis de Renderizado",
@@ -737,7 +755,16 @@
       "indicators": "Indicadores de Detección",
       "noscriptFallback": "Respaldo Noscript",
       "hydrationMarkers": "Marcadores de Hidratación",
-      "description": "El renderizado en servidor mejora el SEO al proporcionar contenido rastreable."
+      "description": "El renderizado en servidor mejora el SEO al proporcionar contenido rastreable.",
+      "analyzers": {
+        "substantialContent": "Contenido de texto sustancial en HTML",
+        "emptyContainer": "Contenedor de aplicación vacío detectado",
+        "csrWarning": "La página parece ser renderizada en cliente - el contenido puede no ser indexado por buscadores",
+        "ssrWithHydration": "{name} detectado (probablemente SSR con hidratación)",
+        "meaningfulNoscript": "Tiene respaldo noscript significativo",
+        "properHeadings": "Estructura de encabezados correcta en HTML inicial",
+        "noNoscriptFallback": "Sin respaldo noscript para usuarios/rastreadores sin JavaScript"
+      }
     },
     "lazyContent": {
       "title": "Carga Diferida y Scroll Infinito",
@@ -751,7 +778,15 @@
       "noPagination": "Sin paginación",
       "patterns": "Patrones Detectados",
       "recommendations": "Recomendaciones",
-      "description": "La carga diferida mejora el rendimiento, pero asegura que el contenido sea rastreable."
+      "description": "La carga diferida mejora el rendimiento, pero asegura que el contenido sea rastreable.",
+      "analyzers": {
+        "infiniteScrollDataAttrs": "Atributos/clases de scroll infinito",
+        "infiniteScrollNoPagination": "Scroll infinito detectado sin paginación de respaldo",
+        "infiniteScrollSeoRecommendation": "Agrega URLs paginadas para contenido con scroll infinito para asegurar que los buscadores puedan rastrear todo el contenido",
+        "infiniteScrollAccessibility": "Asegura que el contenido de scroll infinito sea accesible vía URLs directas para SEO",
+        "considerLazyImages": "Considera agregar lazy loading a imágenes bajo el pliegue para mejor rendimiento",
+        "useNativeLazy": "Considera usar el atributo nativo loading=\"lazy\" para mejor soporte de navegadores"
+      }
     },
     "socialShare": {
       "title": "Botones para Compartir",
@@ -760,7 +795,12 @@
       "platforms": "Plataformas",
       "widgets": "Widgets de Compartir",
       "nativeApi": "API Web Share",
-      "description": "Los botones de compartir fomentan la difusión del contenido y aumentan la visibilidad."
+      "description": "Los botones de compartir fomentan la difusión del contenido y aumentan la visibilidad.",
+      "analyzers": {
+        "noShareButtons": "No se detectaron botones para compartir en redes sociales",
+        "fewShareOptions": "Considera agregar más opciones de compartir en redes",
+        "missingMainPlatforms": "Faltan botones de compartir de Facebook o Twitter/X"
+      }
     },
     "accessibility": {
       "title": "Accesibilidad (WCAG)",
@@ -791,7 +831,52 @@
       "factors": "Factores",
       "recommendations": "Recomendaciones",
       "largestElement": "Elemento Más Grande",
-      "description": "Estimaciones basadas en análisis HTML. Usa herramientas de monitoreo real para mediciones precisas."
+      "description": "Estimaciones basadas en análisis HTML. Usa herramientas de monitoreo real para mediciones precisas.",
+      "analyzers": {
+        "lcp": {
+          "imagePreload": "Precarga de imagen",
+          "imagePreloadDesc": "El candidato LCP puede estar precargado",
+          "lazyAboveFold": "Lazy loading sobre el pliegue",
+          "lazyAboveFoldDesc": "Las primeras imágenes usan lazy loading, lo que puede retrasar el LCP",
+          "lazyAboveFoldIssue": "Considera quitar lazy loading de imágenes sobre el pliegue",
+          "fetchPriority": "Prioridad de carga",
+          "fetchPriorityDesc": "Prioridad alta establecida en imágenes importantes",
+          "blockingStylesheets": "Hojas de estilo bloqueantes",
+          "blockingStylesheetsDesc": "{count} hojas de estilo bloqueantes",
+          "blockingStylesheetsIssue": "Considera reducir o diferir CSS no crítico",
+          "blockingScripts": "Scripts bloqueantes",
+          "blockingScriptsDesc": "{count} scripts bloqueantes",
+          "blockingScriptsIssue": "Agrega async o defer a scripts no críticos",
+          "inlineCriticalCss": "CSS crítico inline",
+          "inlineCriticalCssDesc": "El CSS crítico parece estar inline",
+          "largeHtml": "HTML grande",
+          "largeHtmlDesc": "El tamaño del HTML puede retrasar el renderizado",
+          "largeHtmlIssue": "Considera reducir el tamaño del HTML"
+        },
+        "cls": {
+          "imagesNoDimensions": "Imágenes sin dimensiones",
+          "imagesWithDimensions": "Imágenes con dimensiones",
+          "imagesNoDimensionsIssue": "Agrega atributos width y height a las imágenes para prevenir cambios de diseño",
+          "iframesNoDimensions": "Iframes sin dimensiones",
+          "iframesNoDimensionsIssue": "Agrega dimensiones a los iframes para prevenir cambios de diseño",
+          "adContainersNoSpace": "Contenedores de anuncios sin espacio reservado",
+          "adContainersNoSpaceIssue": "Reserva espacio para contenedores de anuncios para prevenir cambios de diseño",
+          "dynamicPlaceholders": "Marcadores de contenido dinámico",
+          "fontDisplaySwap": "Font display swap"
+        },
+        "fid": {
+          "externalScripts": "{count} scripts externos",
+          "externalScriptsIssue": "Considera reducir el número de scripts externos",
+          "largeInlineJs": "JavaScript inline grande",
+          "largeInlineJsIssue": "Considera mover scripts inline a archivos externos",
+          "asyncDeferScripts": "Usando scripts async/defer",
+          "webWorkers": "Web Workers detectados (bueno para descargar trabajo)"
+        },
+        "inp": {
+          "scrollListeners": "Detectados listeners de evento scroll",
+          "scrollListenersIssue": "Asegura que los manejadores de scroll estén optimizados"
+        }
+      }
     }
   }
 }
