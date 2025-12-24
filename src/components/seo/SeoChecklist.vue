@@ -88,7 +88,9 @@ const checklistItems = computed<ChecklistItem[]>(() => {
     label: t('seo.checklist.items.properHierarchy'),
     status: props.result.headings.hasProperHierarchy ? 'good' : 'warning',
     priority: 'important',
-    details: props.result.headings.hasProperHierarchy ? t('seo.checklist.details.noGaps') : t('seo.checklist.details.hasGaps'),
+    details: props.result.headings.hasProperHierarchy
+      ? t('seo.checklist.details.noGaps')
+      : t('seo.checklist.details.hasGaps'),
   });
 
   items.push({
@@ -152,7 +154,10 @@ const checklistItems = computed<ChecklistItem[]>(() => {
         ? 'good'
         : 'info',
     priority: 'optional',
-    details: t('seo.checklist.details.lazyImages', { lazy: props.result.images.withLazyLoading, total: props.result.images.total }),
+    details: t('seo.checklist.details.lazyImages', {
+      lazy: props.result.images.withLazyLoading,
+      total: props.result.images.total,
+    }),
   });
 
   return items;

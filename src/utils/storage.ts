@@ -1,7 +1,10 @@
 export function safeGetItem(key: string): string | null {
   try {
     return typeof localStorage === 'undefined' ? null : localStorage.getItem(key);
-  } catch {
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn('[Storage] Failed to get item:', key, error);
+    }
     return null;
   }
 }
@@ -12,8 +15,10 @@ export function safeSetItem(key: string, value: string): void {
       return;
     }
     localStorage.setItem(key, value);
-  } catch {
-    return;
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn('[Storage] Failed to set item:', key, error);
+    }
   }
 }
 
@@ -23,7 +28,9 @@ export function safeRemoveItem(key: string): void {
       return;
     }
     localStorage.removeItem(key);
-  } catch {
-    return;
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.warn('[Storage] Failed to remove item:', key, error);
+    }
   }
 }

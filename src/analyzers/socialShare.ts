@@ -2,23 +2,10 @@
  * @fileoverview Social share button detection.
  */
 
-import type { SeoStatus } from '@/types/seo';
+import type { SeoStatus, SocialPlatformShare, SocialShareAnalysis } from '@/types/seo';
 import { t } from '@/utils/i18nHelper';
 
-export interface SocialShareAnalysis {
-  hasShareButtons: boolean;
-  platforms: SocialPlatformShare[];
-  shareWidgets: string[];
-  nativeShareApi: boolean;
-  issues: string[];
-  status: SeoStatus;
-}
-
-export interface SocialPlatformShare {
-  platform: string;
-  detected: boolean;
-  type: 'button' | 'widget' | 'link' | 'sdk';
-}
+export type { SocialShareAnalysis, SocialPlatformShare };
 
 const SOCIAL_SHARE_PATTERNS: Array<{
   platform: string;

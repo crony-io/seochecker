@@ -2,27 +2,11 @@
  * @fileoverview CSR vs SSR detection and rendering analysis.
  */
 
-import type { SeoStatus } from '@/types/seo';
+import type { SeoStatus, RenderingAnalysis, RenderingIndicator } from '@/types/seo';
 import { SUBSTANTIAL_CONTENT_LENGTH, NOSCRIPT_MIN_LENGTH } from '@/constants/seo';
 import { t } from '@/utils/i18nHelper';
 
-export interface RenderingAnalysis {
-  renderingType: 'ssr' | 'csr' | 'hybrid' | 'static' | 'unknown';
-  confidence: number;
-  indicators: RenderingIndicator[];
-  hasNoscriptFallback: boolean;
-  noscriptContent: string | null;
-  appContainerEmpty: boolean;
-  hydrationMarkers: string[];
-  issues: string[];
-  status: SeoStatus;
-}
-
-export interface RenderingIndicator {
-  type: 'ssr' | 'csr';
-  indicator: string;
-  weight: number;
-}
+export type { RenderingAnalysis, RenderingIndicator };
 
 const CSR_FRAMEWORKS = [
   { pattern: /__NEXT_DATA__/i, name: 'Next.js (hydration)', type: 'hybrid' as const },
@@ -88,9 +72,7 @@ export function analyzeRendering(doc: Document, html: string): RenderingAnalysis
       indicator: t('seo.rendering.analyzers.emptyContainer'),
       weight: 5,
     });
-    issues.push(
-      t('seo.rendering.analyzers.csrWarning'),
-    );
+    issues.push(t('seo.rendering.analyzers.csrWarning'));
   }
 
   // Check for SSR framework markers

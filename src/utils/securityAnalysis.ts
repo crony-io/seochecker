@@ -351,10 +351,14 @@ export async function analyzeSecurityHeaders(url: string): Promise<SecurityHeade
     const missingMedium = headers.filter((h) => !h.present && h.severity === 'medium');
 
     if (missingHigh.length > 0) {
-      issues.push(t('seo.security.analyzers.criticalHeadersMissing', { count: missingHigh.length }));
+      issues.push(
+        t('seo.security.analyzers.criticalHeadersMissing', { count: missingHigh.length }),
+      );
     }
     if (missingMedium.length > 0) {
-      issues.push(t('seo.security.analyzers.recommendedHeadersMissing', { count: missingMedium.length }));
+      issues.push(
+        t('seo.security.analyzers.recommendedHeadersMissing', { count: missingMedium.length }),
+      );
     }
   }
 
@@ -449,24 +453,24 @@ export function analyzeFormSecurity(url: string, doc: Document): FormsSecurityAn
     const issues: string[] = [];
 
     if (!usesHttps && hasSensitiveData) {
-      issues.push('CRITICAL: Form with sensitive data does NOT use HTTPS');
+      issues.push(t('seo.security.analyzers.formCriticalSensitive'));
     } else if (!usesHttps && !pageUsesHttps) {
-      issues.push('Form action does not use HTTPS');
+      issues.push(t('seo.security.analyzers.formActionNoHttps'));
     }
 
     if (method === 'POST' && !hasCSRFProtection) {
-      issues.push('Missing CSRF protection');
+      issues.push(t('seo.security.analyzers.formMissingCsrf'));
     }
 
     if (hasSensitiveData && !hasCaptcha) {
-      issues.push('Consider adding CAPTCHA for sensitive forms');
+      issues.push(t('seo.security.analyzers.formNoCaptcha'));
     }
 
     // Check password field autocomplete
     passwordFields.forEach((field) => {
       const autocomplete = field.getAttribute('autocomplete');
       if (!autocomplete || autocomplete === 'on') {
-        issues.push('Password field missing proper autocomplete attribute');
+        issues.push(t('seo.security.analyzers.passwordNoAutocomplete'));
       }
     });
 
@@ -487,14 +491,14 @@ export function analyzeFormSecurity(url: string, doc: Document): FormsSecurityAn
 
   const allIssues: string[] = [];
   if (criticalIssues > 0) {
-    allIssues.push(`${criticalIssues} form(s) with sensitive data NOT using HTTPS`);
+    allIssues.push(t('seo.security.analyzers.formsCriticalCount', { count: criticalIssues }));
   }
 
   const formsWithoutCSRF = formAnalysis.filter(
     (f) => f.method === 'POST' && !f.hasCSRFProtection,
   ).length;
   if (formsWithoutCSRF > 0) {
-    allIssues.push(`${formsWithoutCSRF} POST form(s) without CSRF protection`);
+    allIssues.push(t('seo.security.analyzers.formsNoCsrfCount', { count: formsWithoutCSRF }));
   }
 
   let status: SeoStatus = 'good';

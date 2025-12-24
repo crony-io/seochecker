@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type { SeoAnalysisResult } from '@/types/seo';
-import { exportAsJson, exportAsCsv, exportAsPdf } from '@/utils/exportReport';
+import { exportAsJson, exportAsCsv, exportAsPdf, exportAsText } from '@/utils/export';
 
 const props = defineProps<{
   result: SeoAnalysisResult;
@@ -40,6 +40,17 @@ async function handleExportPdf(): Promise<void> {
   isExporting.value = true;
   try {
     exportAsPdf(props.result);
+  } finally {
+    setTimeout(() => {
+      isExporting.value = false;
+    }, 500);
+  }
+}
+
+async function handleExportTxt(): Promise<void> {
+  isExporting.value = true;
+  try {
+    exportAsText(props.result);
   } finally {
     setTimeout(() => {
       isExporting.value = false;
@@ -84,6 +95,16 @@ async function handleExportPdf(): Promise<void> {
       >
         <FileText class="h-4 w-4" aria-hidden="true" />
         {{ t('seo.export.pdf') }}
+      </button>
+
+      <button
+        type="button"
+        class="btn-outline flex items-center gap-2 text-sm"
+        :disabled="isExporting"
+        @click="handleExportTxt"
+      >
+        <FileText class="h-4 w-4" aria-hidden="true" />
+        {{ t('seo.export.txt') }}
       </button>
     </div>
   </div>

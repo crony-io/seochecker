@@ -2,7 +2,7 @@
  * @fileoverview Resource optimization analysis - minification, print styles, etc.
  */
 
-import type { SeoStatus } from '@/types/seo';
+import type { SeoStatus, ResourceInfo, ResourceOptimizationAnalysis } from '@/types/seo';
 import {
   MINIFICATION_RATE_WARNING,
   MINIFICATION_RATE_ERROR,
@@ -11,27 +11,7 @@ import {
 } from '@/constants/seo';
 import { t } from '@/utils/i18nHelper';
 
-export interface ResourceInfo {
-  url: string;
-  type: 'script' | 'stylesheet';
-  isMinified: boolean;
-  size?: number;
-  issues: string[];
-}
-
-export interface ResourceOptimizationAnalysis {
-  scripts: ResourceInfo[];
-  stylesheets: ResourceInfo[];
-  minifiedScripts: number;
-  minifiedStylesheets: number;
-  totalScripts: number;
-  totalStylesheets: number;
-  hasPrintStyles: boolean;
-  printStylesheets: string[];
-  printMediaQueries: number;
-  issues: string[];
-  status: SeoStatus;
-}
+export type { ResourceInfo, ResourceOptimizationAnalysis };
 
 /**
  * Checks if content appears to be minified.
@@ -147,7 +127,9 @@ export function analyzeResourceOptimization(
         url: src,
         type: 'script',
         isMinified: isMinifiedByUrl,
-        issues: isMinifiedByUrl ? [] : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
+        issues: isMinifiedByUrl
+          ? []
+          : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
       });
     }
   });
@@ -175,7 +157,9 @@ export function analyzeResourceOptimization(
         url: href,
         type: 'stylesheet',
         isMinified: isMinifiedByUrl,
-        issues: isMinifiedByUrl ? [] : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
+        issues: isMinifiedByUrl
+          ? []
+          : [t('seo.resourceOptimization.analyzers.notMinifiedFilename')],
       });
     }
   });
@@ -206,10 +190,14 @@ export function analyzeResourceOptimization(
   const nonMinifiedStyles = stylesheets.length - minifiedStylesheets;
 
   if (nonMinifiedScripts > 0) {
-    issues.push(t('seo.resourceOptimization.analyzers.scriptsNotMinified', { count: nonMinifiedScripts }));
+    issues.push(
+      t('seo.resourceOptimization.analyzers.scriptsNotMinified', { count: nonMinifiedScripts }),
+    );
   }
   if (nonMinifiedStyles > 0) {
-    issues.push(t('seo.resourceOptimization.analyzers.stylesheetsNotMinified', { count: nonMinifiedStyles }));
+    issues.push(
+      t('seo.resourceOptimization.analyzers.stylesheetsNotMinified', { count: nonMinifiedStyles }),
+    );
   }
 
   // Determine status

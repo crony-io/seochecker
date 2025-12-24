@@ -163,10 +163,14 @@ function analyzeIframes(doc: Document): EmbeddedContentAnalysis['iframes'] {
 
   // Global issues
   if (withoutTitle > 0) {
-    globalIssues.push(t('seo.embeddedContent.analyzers.iframesMissingTitle', { count: withoutTitle }));
+    globalIssues.push(
+      t('seo.embeddedContent.analyzers.iframesMissingTitle', { count: withoutTitle }),
+    );
   }
   if (withoutLazyLoading > 0) {
-    globalIssues.push(t('seo.embeddedContent.analyzers.iframesNoLazyLoading', { count: withoutLazyLoading }));
+    globalIssues.push(
+      t('seo.embeddedContent.analyzers.iframesNoLazyLoading', { count: withoutLazyLoading }),
+    );
   }
 
   // Determine status
@@ -256,13 +260,17 @@ function analyzeVideos(doc: Document): EmbeddedContentAnalysis['videos'] {
 
   // Global issues
   if (withoutControls > 0) {
-    globalIssues.push(t('seo.embeddedContent.analyzers.videosNoControls', { count: withoutControls }));
+    globalIssues.push(
+      t('seo.embeddedContent.analyzers.videosNoControls', { count: withoutControls }),
+    );
   }
   if (withAutoplay > 0) {
     globalIssues.push(t('seo.embeddedContent.analyzers.videosAutoplay', { count: withAutoplay }));
   }
   if (withoutCaptions > 0) {
-    globalIssues.push(t('seo.embeddedContent.analyzers.videosNoCaptions', { count: withoutCaptions }));
+    globalIssues.push(
+      t('seo.embeddedContent.analyzers.videosNoCaptions', { count: withoutCaptions }),
+    );
   }
 
   // Determine status
@@ -333,7 +341,9 @@ function analyzeAudios(doc: Document): EmbeddedContentAnalysis['audios'] {
 
   // Global issues
   if (withoutControls > 0) {
-    globalIssues.push(t('seo.embeddedContent.analyzers.audiosNoControls', { count: withoutControls }));
+    globalIssues.push(
+      t('seo.embeddedContent.analyzers.audiosNoControls', { count: withoutControls }),
+    );
   }
   if (withAutoplay > 0) {
     globalIssues.push(t('seo.embeddedContent.analyzers.audiosAutoplay', { count: withAutoplay }));

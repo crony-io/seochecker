@@ -151,7 +151,9 @@ export const useSeoStore = defineStore('seo', () => {
 
     try {
       const analysisResult = analyzeSeo(fetchResult.html, urlToAnalyze, fetchResult.duration);
-      result.value = analysisResult;
+      // Extract the parsed Document for reuse (parsed once in analyzeSeo)
+      const { _doc: doc, ...resultWithoutDoc } = analysisResult;
+      result.value = resultWithoutDoc;
       state.value = 'complete';
 
       addToHistory({
@@ -160,15 +162,13 @@ export const useSeoStore = defineStore('seo', () => {
         overallScore: analysisResult.overallScore,
       });
 
-      // Perform URL and embedded content analysis (sync)
+      // Perform URL and embedded content analysis (sync) - reuse parsed Document
       urlAnalysis.value = analyzeUrl(urlToAnalyze);
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(fetchResult.html, 'text/html');
       embeddedContent.value = analyzeEmbeddedContent(doc);
 
-      // Fetch robots.txt, sitemap, and security analysis in background
+      // Fetch robots.txt, sitemap, and security analysis in background - reuse Document
       fetchRobotsAndSitemap(urlToAnalyze);
-      fetchSecurityAnalysis(urlToAnalyze, fetchResult.html);
+      fetchSecurityAnalysis(urlToAnalyze, doc);
     } catch (err) {
       error.value = {
         type: 'unknown',
@@ -190,7 +190,9 @@ export const useSeoStore = defineStore('seo', () => {
 
     try {
       const analysisResult = analyzeSeo(manualHtml.value, targetUrl, 0);
-      result.value = analysisResult;
+      // Extract the parsed Document for reuse, store result without _doc
+      const { _doc: doc, ...resultWithoutDoc } = analysisResult;
+      result.value = resultWithoutDoc;
       state.value = 'complete';
       showManualInput.value = false;
 
@@ -199,6 +201,10 @@ export const useSeoStore = defineStore('seo', () => {
         analyzedAt: analysisResult.analyzedAt,
         overallScore: analysisResult.overallScore,
       });
+
+      // Perform additional analysis with reused Document
+      urlAnalysis.value = analyzeUrl(targetUrl);
+      embeddedContent.value = analyzeEmbeddedContent(doc);
     } catch (err) {
       error.value = {
         type: 'unknown',
@@ -236,13 +242,11 @@ export const useSeoStore = defineStore('seo', () => {
     }
   }
 
-  async function fetchSecurityAnalysis(targetUrl: string, html: string): Promise<void> {
+  async function fetchSecurityAnalysis(targetUrl: string, doc: Document): Promise<void> {
     isLoadingSecurity.value = true;
     security.value = null;
 
     try {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
       const securityResult = await analyzeSecurityFull(targetUrl, doc);
       security.value = securityResult;
     } catch (error) {

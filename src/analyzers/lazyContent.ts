@@ -2,23 +2,10 @@
  * @fileoverview Lazy loading and infinite scroll detection.
  */
 
-import type { SeoStatus } from '@/types/seo';
+import type { SeoStatus, LazyContentAnalysis } from '@/types/seo';
 import { t } from '@/utils/i18nHelper';
 
-export interface LazyContentAnalysis {
-  hasInfiniteScroll: boolean;
-  infiniteScrollPatterns: string[];
-  hasLazyImages: boolean;
-  lazyImageCount: number;
-  hasLazyIframes: boolean;
-  lazyIframeCount: number;
-  hasIntersectionObserver: boolean;
-  hasPagination: boolean;
-  paginationLinks: string[];
-  issues: string[];
-  recommendations: string[];
-  status: SeoStatus;
-}
+export type { LazyContentAnalysis };
 
 const INFINITE_SCROLL_PATTERNS = [
   { pattern: /infinite[\s-_]?scroll/i, name: 'Infinite scroll class/ID' },
@@ -120,9 +107,7 @@ export function analyzeLazyContent(doc: Document, html: string): LazyContentAnal
   // Generate issues and recommendations
   if (hasInfiniteScroll && !hasPagination) {
     issues.push(t('seo.lazyContent.analyzers.infiniteScrollNoPagination'));
-    recommendations.push(
-      t('seo.lazyContent.analyzers.infiniteScrollSeoRecommendation'),
-    );
+    recommendations.push(t('seo.lazyContent.analyzers.infiniteScrollSeoRecommendation'));
   }
 
   if (hasInfiniteScroll) {
@@ -130,15 +115,11 @@ export function analyzeLazyContent(doc: Document, html: string): LazyContentAnal
   }
 
   if (!hasLazyImages && doc.querySelectorAll('img').length > 5) {
-    recommendations.push(
-      t('seo.lazyContent.analyzers.considerLazyImages'),
-    );
+    recommendations.push(t('seo.lazyContent.analyzers.considerLazyImages'));
   }
 
   if (nativeLazyImages.length < lazyImageCount && lazyImageCount > 0) {
-    recommendations.push(
-      t('seo.lazyContent.analyzers.useNativeLazy'),
-    );
+    recommendations.push(t('seo.lazyContent.analyzers.useNativeLazy'));
   }
 
   // Determine status

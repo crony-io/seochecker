@@ -134,12 +134,16 @@ export function analyzeUrl(url: string): UrlAnalysis {
 
   // Check URL length
   if (url.length > MAX_URL_LENGTH) {
-    issues.push(t('seo.urlAnalysis.analyzers.tooLong', { length: url.length, max: MAX_URL_LENGTH }));
+    issues.push(
+      t('seo.urlAnalysis.analyzers.tooLong', { length: url.length, max: MAX_URL_LENGTH }),
+    );
   }
 
   // Check path depth
   if (pathSegments.length > MAX_PATH_DEPTH) {
-    issues.push(t('seo.urlAnalysis.analyzers.tooDeep', { depth: pathSegments.length, max: MAX_PATH_DEPTH }));
+    issues.push(
+      t('seo.urlAnalysis.analyzers.tooDeep', { depth: pathSegments.length, max: MAX_PATH_DEPTH }),
+    );
   }
 
   // Check for underscores
@@ -160,7 +164,12 @@ export function analyzeUrl(url: string): UrlAnalysis {
   // Check segment lengths
   const longSegments = readability.segmentLengths.filter((l) => l > MAX_SEGMENT_LENGTH);
   if (longSegments.length > 0) {
-    issues.push(t('seo.urlAnalysis.analyzers.longSegments', { count: longSegments.length, max: MAX_SEGMENT_LENGTH }));
+    issues.push(
+      t('seo.urlAnalysis.analyzers.longSegments', {
+        count: longSegments.length,
+        max: MAX_SEGMENT_LENGTH,
+      }),
+    );
   }
 
   // Check for query parameters

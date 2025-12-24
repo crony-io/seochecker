@@ -3,7 +3,7 @@
  * Re-exports all analyzer modules and provides the main analyzeSeo function.
  */
 
-import type { SeoAnalysisResult } from '@/types/seo';
+import type { SeoAnalysisResultWithDoc } from '@/types/seo';
 import {
   analyzeDom,
   checkTechnicalElements,
@@ -67,8 +67,13 @@ export {
 
 /**
  * Performs complete SEO analysis on HTML content.
+ * Returns both the analysis result and the parsed Document for reuse.
  */
-export function analyzeSeo(html: string, url: string, fetchDuration: number): SeoAnalysisResult {
+export function analyzeSeo(
+  html: string,
+  url: string,
+  fetchDuration: number,
+): SeoAnalysisResultWithDoc {
   const doc = parseHtml(html);
   const meta = extractMetaTags(doc);
   const headings = extractHeadings(doc);
@@ -140,5 +145,6 @@ export function analyzeSeo(html: string, url: string, fetchDuration: number): Se
   return {
     ...partialResult,
     overallScore: calculateOverallScore(partialResult),
+    _doc: doc,
   };
 }

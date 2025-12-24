@@ -73,7 +73,9 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
     factors.push({
       factor: t('seo.coreWebVitals.analyzers.lcp.blockingStylesheets'),
       impact: 'negative',
-      description: t('seo.coreWebVitals.analyzers.lcp.blockingStylesheetsDesc', { count: blockingStyles.length }),
+      description: t('seo.coreWebVitals.analyzers.lcp.blockingStylesheetsDesc', {
+        count: blockingStyles.length,
+      }),
     });
     issues.push(t('seo.coreWebVitals.analyzers.lcp.blockingStylesheetsIssue'));
     score -= blockingStyles.length * 3;
@@ -83,7 +85,9 @@ export function estimateLcp(doc: Document, html: string): LcpEstimate {
     factors.push({
       factor: t('seo.coreWebVitals.analyzers.lcp.blockingScripts'),
       impact: 'negative',
-      description: t('seo.coreWebVitals.analyzers.lcp.blockingScriptsDesc', { count: blockingScripts.length }),
+      description: t('seo.coreWebVitals.analyzers.lcp.blockingScriptsDesc', {
+        count: blockingScripts.length,
+      }),
     });
     issues.push(t('seo.coreWebVitals.analyzers.lcp.blockingScriptsIssue'));
     score -= blockingScripts.length * 5;

@@ -34,7 +34,9 @@ export function estimateInteractivity(doc: Document, html: string): Interactivit
   });
 
   if (scripts.length > EXTERNAL_SCRIPTS_MAX) {
-    fidFactors.push(t('seo.coreWebVitals.analyzers.fid.externalScripts', { count: scripts.length }));
+    fidFactors.push(
+      t('seo.coreWebVitals.analyzers.fid.externalScripts', { count: scripts.length }),
+    );
     fidIssues.push(t('seo.coreWebVitals.analyzers.fid.externalScriptsIssue'));
     fidScore -= 15;
   }

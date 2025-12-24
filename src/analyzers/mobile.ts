@@ -28,9 +28,21 @@ export function analyzeMobile(doc: Document, html: string): MobileAnalysis {
   let smallFontCount = 0;
   elementsWithSmallFont.forEach((el) => {
     const style = el.getAttribute('style') || '';
-    const match = style.match(/font-size:\s*(\d+)/);
-    if (match?.[1] && parseInt(match[1], 10) < MOBILE_MIN_FONT_SIZE) {
-      smallFontCount++;
+    const match = style.match(/font-size:\s*(\d+(?:\.\d+)?)(px|rem|em|pt|%)?/i);
+    if (match?.[1]) {
+      const value = parseFloat(match[1]);
+      const unit = match[2]?.toLowerCase() || 'px';
+      let pxValue = value;
+      if (unit === 'rem' || unit === 'em') {
+        pxValue = value * 16;
+      } else if (unit === 'pt') {
+        pxValue = value * 1.333;
+      } else if (unit === '%') {
+        pxValue = (value / 100) * 16;
+      }
+      if (pxValue < MOBILE_MIN_FONT_SIZE) {
+        smallFontCount++;
+      }
     }
   });
 
