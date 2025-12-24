@@ -2,7 +2,9 @@
  * @fileoverview Export utilities for SEO analysis reports.
  */
 
+import { getScoreColorHex } from '@/constants/seo';
 import type { SeoAnalysisResult } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 /**
  * Exports the analysis result as a JSON file.
@@ -19,200 +21,193 @@ export function exportAsJson(result: SeoAnalysisResult): void {
 export function exportAsCsv(result: SeoAnalysisResult): void {
   const rows: string[][] = [];
 
+  // Shorthand for translation keys
+  const r = (key: string) => t(`seo.export.report.${key}`);
+  const f = (key: string) => t(`seo.export.report.fields.${key}`);
+  const c = (key: string) => t(`seo.export.report.csv.${key}`);
+  const yesNo = (val: boolean) => (val ? r('yes') : r('no'));
+
   // Header
-  rows.push(['Category', 'Metric', 'Value', 'Status']);
+  rows.push([c('category'), c('metric'), c('value'), c('status')]);
 
   // General info
-  rows.push(['General', 'URL', result.url, '']);
-  rows.push(['General', 'Analyzed At', result.analyzedAt, '']);
-  rows.push(['General', 'Overall Score', String(result.overallScore), '']);
+  rows.push([c('general'), r('url'), result.url, '']);
+  rows.push([c('general'), c('analyzedAt'), result.analyzedAt, '']);
+  rows.push([c('general'), r('overallScore'), String(result.overallScore), '']);
+
+  // Section names
+  const meta = t('seo.meta.title');
+  const headings = t('seo.headings.title');
+  const content = t('seo.content.title');
+  const images = t('seo.images.title');
+  const links = t('seo.links.title');
+  const technical = t('seo.technical.title');
+  const keywords = t('seo.keywords.title');
+  const mobile = t('seo.mobile.title');
+  const anchorText = t('seo.anchorText.title');
+  const resources = t('seo.resourceOptimization.title');
+  const rendering = t('seo.rendering.title');
+  const lazyContent = t('seo.lazyContent.title');
+  const socialShare = t('seo.socialShare.title');
+  const accessibility = t('seo.accessibility.title');
+  const cwv = t('seo.coreWebVitals.title');
 
   // Meta
   rows.push([
-    'Meta',
-    'Title',
-    String(result.meta.title.value ?? 'Missing'),
+    meta,
+    f('title'),
+    String(result.meta.title.value ?? r('missing')),
     result.meta.title.status,
   ]);
-  rows.push(['Meta', 'Title Length', String(result.meta.title.length), '']);
+  rows.push([meta, f('titleLength'), String(result.meta.title.length), '']);
   rows.push([
-    'Meta',
-    'Description',
-    String(result.meta.description.value ?? 'Missing'),
+    meta,
+    f('description'),
+    String(result.meta.description.value ?? r('missing')),
     result.meta.description.status,
   ]);
-  rows.push(['Meta', 'Description Length', String(result.meta.description.length), '']);
+  rows.push([meta, f('descriptionLength'), String(result.meta.description.length), '']);
   rows.push([
-    'Meta',
-    'Canonical',
-    String(result.meta.canonical.value ?? 'Not set'),
+    meta,
+    f('canonical'),
+    String(result.meta.canonical.value ?? r('notSet')),
     result.meta.canonical.status,
   ]);
 
   // Headings
-  rows.push(['Headings', 'H1 Count', String(result.headings.h1Count), result.headings.status]);
-  rows.push(['Headings', 'Total Headings', String(result.headings.items.length), '']);
-  rows.push([
-    'Headings',
-    'Proper Hierarchy',
-    result.headings.hasProperHierarchy ? 'Yes' : 'No',
-    '',
-  ]);
+  rows.push([headings, f('h1Count'), String(result.headings.h1Count), result.headings.status]);
+  rows.push([headings, f('totalHeadings'), String(result.headings.items.length), '']);
+  rows.push([headings, f('properHierarchy'), yesNo(result.headings.hasProperHierarchy), '']);
 
   // Content
-  rows.push(['Content', 'Word Count', String(result.content.wordCount), result.content.status]);
-  rows.push(['Content', 'Reading Time (min)', String(result.content.readingTimeMinutes), '']);
-  rows.push(['Content', 'Text/HTML Ratio', `${result.content.textToHtmlRatio}%`, '']);
+  rows.push([content, f('wordCount'), String(result.content.wordCount), result.content.status]);
+  rows.push([content, f('readingTime'), String(result.content.readingTimeMinutes), '']);
+  rows.push([content, f('textHtmlRatio'), `${result.content.textToHtmlRatio}%`, '']);
 
   // Images
-  rows.push(['Images', 'Total Images', String(result.images.total), result.images.status]);
-  rows.push(['Images', 'Missing Alt', String(result.images.withoutAlt), '']);
-  rows.push(['Images', 'With Lazy Loading', String(result.images.withLazyLoading), '']);
+  rows.push([images, f('total'), String(result.images.total), result.images.status]);
+  rows.push([images, f('missingAlt'), String(result.images.withoutAlt), '']);
+  rows.push([images, f('lazyLoading'), String(result.images.withLazyLoading), '']);
 
   // Links
-  rows.push(['Links', 'Total Links', String(result.links.total), result.links.status]);
-  rows.push(['Links', 'Internal', String(result.links.internal), '']);
-  rows.push(['Links', 'External', String(result.links.external), '']);
-  rows.push(['Links', 'Nofollow', String(result.links.nofollow), '']);
+  rows.push([links, f('total'), String(result.links.total), result.links.status]);
+  rows.push([links, f('internal'), String(result.links.internal), '']);
+  rows.push([links, f('external'), String(result.links.external), '']);
+  rows.push([links, f('nofollow'), String(result.links.nofollow), '']);
 
   // Technical
-  rows.push([
-    'Technical',
-    'HTTPS',
-    result.technical.isHttps ? 'Yes' : 'No',
-    result.technical.status,
-  ]);
-  rows.push(['Technical', 'Has Doctype', result.technical.hasDoctype ? 'Yes' : 'No', '']);
-  rows.push(['Technical', 'Has Charset', result.technical.hasCharset ? 'Yes' : 'No', '']);
-  rows.push(['Technical', 'Has Viewport', result.technical.hasViewport ? 'Yes' : 'No', '']);
+  rows.push([technical, f('https'), yesNo(result.technical.isHttps), result.technical.status]);
+  rows.push([technical, f('doctype'), yesNo(result.technical.hasDoctype), '']);
+  rows.push([technical, f('charset'), yesNo(result.technical.hasCharset), '']);
+  rows.push([technical, f('viewport'), yesNo(result.technical.hasViewport), '']);
 
   // Performance
   rows.push([
-    'Performance',
-    'HTML Size (bytes)',
+    t('seo.performance.title'),
+    f('htmlSize'),
     String(result.performance.htmlSize),
     result.performance.status,
   ]);
-  rows.push(['Performance', 'DOM Elements', String(result.performance.domElements), '']);
-  rows.push(['Performance', 'DOM Depth', String(result.performance.domDepth), '']);
+  rows.push([
+    t('seo.performance.title'),
+    f('domElements'),
+    String(result.performance.domElements),
+    '',
+  ]);
+  rows.push([t('seo.performance.title'), f('domDepth'), String(result.performance.domDepth), '']);
 
   // Keywords
   rows.push([
-    'Keywords',
-    'Total Words',
+    keywords,
+    t('seo.keywords.totalWords'),
     String(result.keywords.totalWords),
     result.keywords.status,
   ]);
-  rows.push(['Keywords', 'Unique Words', String(result.keywords.uniqueWords), '']);
+  rows.push([keywords, t('seo.keywords.uniqueWords'), String(result.keywords.uniqueWords), '']);
 
   // Top keywords
   result.keywords.topKeywords.slice(0, 10).forEach((kw, index) => {
-    rows.push(['Keywords', `Top ${index + 1}`, `${kw.word} (${kw.count}x, ${kw.density}%)`, '']);
+    rows.push([keywords, `Top ${index + 1}`, `${kw.word} (${kw.count}x, ${kw.density}%)`, '']);
   });
 
   // Mobile
-  rows.push([
-    'Mobile',
-    'Has Viewport',
-    result.mobile.hasViewport ? 'Yes' : 'No',
-    result.mobile.status,
-  ]);
-  rows.push(['Mobile', 'Responsive Images', result.mobile.hasResponsiveImages ? 'Yes' : 'No', '']);
-  rows.push(['Mobile', 'Media Queries', result.mobile.mediaQueries ? 'Yes' : 'No', '']);
+  rows.push([mobile, f('viewport'), yesNo(result.mobile.hasViewport), result.mobile.status]);
+  rows.push([mobile, f('responsiveImages'), yesNo(result.mobile.hasResponsiveImages), '']);
+  rows.push([mobile, f('mediaQueries'), yesNo(result.mobile.mediaQueries), '']);
 
   // Anchor Text
-  rows.push(['Anchor Text', 'Total', String(result.anchorText.total), result.anchorText.status]);
-  rows.push(['Anchor Text', 'Descriptive', String(result.anchorText.descriptive), '']);
-  rows.push(['Anchor Text', 'Generic', String(result.anchorText.generic), '']);
+  rows.push([anchorText, f('total'), String(result.anchorText.total), result.anchorText.status]);
+  rows.push([anchorText, f('descriptive'), String(result.anchorText.descriptive), '']);
+  rows.push([anchorText, f('generic'), String(result.anchorText.generic), '']);
 
   // Resource Optimization
   rows.push([
-    'Resources',
-    'Scripts Minified',
+    resources,
+    f('scriptsMinified'),
     `${result.resourceOptimization.minifiedScripts}/${result.resourceOptimization.totalScripts}`,
     result.resourceOptimization.status,
   ]);
   rows.push([
-    'Resources',
-    'Stylesheets Minified',
+    resources,
+    f('stylesheetsMinified'),
     `${result.resourceOptimization.minifiedStylesheets}/${result.resourceOptimization.totalStylesheets}`,
     '',
   ]);
-  rows.push([
-    'Resources',
-    'Has Print Styles',
-    result.resourceOptimization.hasPrintStyles ? 'Yes' : 'No',
-    '',
-  ]);
+  rows.push([resources, f('printStyles'), yesNo(result.resourceOptimization.hasPrintStyles), '']);
 
   // Rendering
-  rows.push(['Rendering', 'Type', result.rendering.renderingType, result.rendering.status]);
-  rows.push(['Rendering', 'Confidence', `${result.rendering.confidence}%`, '']);
-  rows.push([
-    'Rendering',
-    'Noscript Fallback',
-    result.rendering.hasNoscriptFallback ? 'Yes' : 'No',
-    '',
-  ]);
+  rows.push([rendering, f('type'), result.rendering.renderingType, result.rendering.status]);
+  rows.push([rendering, f('confidence'), `${result.rendering.confidence}%`, '']);
+  rows.push([rendering, f('noscriptFallback'), yesNo(result.rendering.hasNoscriptFallback), '']);
 
   // Lazy Content
   rows.push([
-    'Lazy Content',
-    'Infinite Scroll',
-    result.lazyContent.hasInfiniteScroll ? 'Yes' : 'No',
+    lazyContent,
+    f('infiniteScroll'),
+    yesNo(result.lazyContent.hasInfiniteScroll),
     result.lazyContent.status,
   ]);
-  rows.push(['Lazy Content', 'Lazy Images', String(result.lazyContent.lazyImageCount), '']);
-  rows.push([
-    'Lazy Content',
-    'Has Pagination',
-    result.lazyContent.hasPagination ? 'Yes' : 'No',
-    '',
-  ]);
+  rows.push([lazyContent, f('lazyImages'), String(result.lazyContent.lazyImageCount), '']);
+  rows.push([lazyContent, f('pagination'), yesNo(result.lazyContent.hasPagination), '']);
 
   // Social Share
   rows.push([
-    'Social Share',
-    'Has Share Buttons',
-    result.socialShare.hasShareButtons ? 'Yes' : 'No',
+    socialShare,
+    f('shareButtons'),
+    yesNo(result.socialShare.hasShareButtons),
     result.socialShare.status,
   ]);
   const detectedPlatforms = result.socialShare.platforms
     .filter((p) => p.detected)
     .map((p) => p.platform)
     .join(', ');
-  rows.push(['Social Share', 'Platforms', detectedPlatforms || 'None', '']);
+  rows.push([socialShare, f('platforms'), detectedPlatforms || r('none'), '']);
 
   // Accessibility
   rows.push([
-    'Accessibility',
-    'Score',
+    accessibility,
+    f('score'),
     String(result.accessibility.score),
     result.accessibility.status,
   ]);
   rows.push([
-    'Accessibility',
-    'Errors',
+    accessibility,
+    f('errors'),
     String(result.accessibility.issues.filter((i) => i.type === 'error').length),
     '',
   ]);
   rows.push([
-    'Accessibility',
-    'Warnings',
+    accessibility,
+    f('warnings'),
     String(result.accessibility.issues.filter((i) => i.type === 'warning').length),
     '',
   ]);
 
   // Core Web Vitals
-  rows.push([
-    'Core Web Vitals',
-    'LCP Estimate',
-    result.coreWebVitals.lcp.estimate,
-    result.coreWebVitals.overallStatus,
-  ]);
-  rows.push(['Core Web Vitals', 'CLS Estimate', result.coreWebVitals.cls.estimate, '']);
-  rows.push(['Core Web Vitals', 'FID Estimate', result.coreWebVitals.fid.estimate, '']);
-  rows.push(['Core Web Vitals', 'INP Estimate', result.coreWebVitals.inp.estimate, '']);
+  rows.push([cwv, f('lcp'), result.coreWebVitals.lcp.estimate, result.coreWebVitals.overallStatus]);
+  rows.push([cwv, f('cls'), result.coreWebVitals.cls.estimate, '']);
+  rows.push([cwv, f('fid'), result.coreWebVitals.fid.estimate, '']);
+  rows.push([cwv, f('inp'), result.coreWebVitals.inp.estimate, '']);
 
   const csvContent = rows.map((row) => row.map(escapeCSV).join(',')).join('\n');
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -225,129 +220,141 @@ export function exportAsCsv(result: SeoAnalysisResult): void {
 export function generateTextReport(result: SeoAnalysisResult): string {
   const lines: string[] = [];
 
-  lines.push('SEO ANALYSIS REPORT');
+  // Shorthand helpers
+  const r = (key: string) => t(`seo.export.report.${key}`);
+  const f = (key: string) => t(`seo.export.report.fields.${key}`);
+  const s = (key: string) => t(`seo.export.report.sections.${key}`);
+  const yesNo = (val: boolean) => (val ? r('yes') : r('no'));
+
+  lines.push(r('title'));
   lines.push('='.repeat(50));
   lines.push('');
-  lines.push(`URL: ${result.url}`);
-  lines.push(`Analyzed: ${new Date(result.analyzedAt).toLocaleString()}`);
-  lines.push(`Overall Score: ${result.overallScore}/100`);
+  lines.push(`${r('url')}: ${result.url}`);
+  lines.push(`${r('analyzed')}: ${new Date(result.analyzedAt).toLocaleString()}`);
+  lines.push(`${r('overallScore')}: ${result.overallScore}/100`);
   lines.push('');
 
-  lines.push('META TAGS');
+  lines.push(s('metaTags'));
   lines.push('-'.repeat(30));
-  lines.push(`Title: ${result.meta.title.value ?? 'Missing'} (${result.meta.title.length} chars)`);
   lines.push(
-    `Description: ${result.meta.description.value ?? 'Missing'} (${result.meta.description.length} chars)`,
+    `${f('title')}: ${result.meta.title.value ?? r('missing')} (${result.meta.title.length} ${r('chars')})`,
   );
-  lines.push(`Canonical: ${result.meta.canonical.value ?? 'Not set'}`);
+  lines.push(
+    `${f('description')}: ${result.meta.description.value ?? r('missing')} (${result.meta.description.length} ${r('chars')})`,
+  );
+  lines.push(`${f('canonical')}: ${result.meta.canonical.value ?? r('notSet')}`);
   lines.push('');
 
-  lines.push('HEADINGS');
+  lines.push(s('headings'));
   lines.push('-'.repeat(30));
-  lines.push(`H1 Count: ${result.headings.h1Count}`);
-  lines.push(`Total Headings: ${result.headings.items.length}`);
-  lines.push(`Proper Hierarchy: ${result.headings.hasProperHierarchy ? 'Yes' : 'No'}`);
+  lines.push(`${f('h1Count')}: ${result.headings.h1Count}`);
+  lines.push(`${f('totalHeadings')}: ${result.headings.items.length}`);
+  lines.push(`${f('properHierarchy')}: ${yesNo(result.headings.hasProperHierarchy)}`);
   lines.push('');
 
-  lines.push('CONTENT');
+  lines.push(s('content'));
   lines.push('-'.repeat(30));
-  lines.push(`Word Count: ${result.content.wordCount}`);
-  lines.push(`Reading Time: ${result.content.readingTimeMinutes} min`);
-  lines.push(`Text/HTML Ratio: ${result.content.textToHtmlRatio}%`);
+  lines.push(`${f('wordCount')}: ${result.content.wordCount}`);
+  lines.push(`${f('readingTime')}: ${result.content.readingTimeMinutes} min`);
+  lines.push(`${f('textHtmlRatio')}: ${result.content.textToHtmlRatio}%`);
   lines.push('');
 
-  lines.push('IMAGES');
+  lines.push(s('images'));
   lines.push('-'.repeat(30));
-  lines.push(`Total: ${result.images.total}`);
-  lines.push(`Missing Alt: ${result.images.withoutAlt}`);
-  lines.push(`Lazy Loading: ${result.images.withLazyLoading}`);
+  lines.push(`${f('total')}: ${result.images.total}`);
+  lines.push(`${f('missingAlt')}: ${result.images.withoutAlt}`);
+  lines.push(`${f('lazyLoading')}: ${result.images.withLazyLoading}`);
   lines.push('');
 
-  lines.push('LINKS');
+  lines.push(s('links'));
   lines.push('-'.repeat(30));
-  lines.push(`Total: ${result.links.total}`);
-  lines.push(`Internal: ${result.links.internal}`);
-  lines.push(`External: ${result.links.external}`);
+  lines.push(`${f('total')}: ${result.links.total}`);
+  lines.push(`${f('internal')}: ${result.links.internal}`);
+  lines.push(`${f('external')}: ${result.links.external}`);
   lines.push('');
 
-  lines.push('TECHNICAL');
+  lines.push(s('technical'));
   lines.push('-'.repeat(30));
-  lines.push(`HTTPS: ${result.technical.isHttps ? 'Yes' : 'No'}`);
-  lines.push(`Doctype: ${result.technical.hasDoctype ? 'Yes' : 'No'}`);
-  lines.push(`Viewport: ${result.technical.hasViewport ? 'Yes' : 'No'}`);
+  lines.push(`${f('https')}: ${yesNo(result.technical.isHttps)}`);
+  lines.push(`${f('doctype')}: ${yesNo(result.technical.hasDoctype)}`);
+  lines.push(`${f('viewport')}: ${yesNo(result.technical.hasViewport)}`);
   lines.push('');
 
-  lines.push('TOP KEYWORDS');
+  lines.push(s('topKeywords'));
   lines.push('-'.repeat(30));
   result.keywords.topKeywords.slice(0, 10).forEach((kw, index) => {
     lines.push(`${index + 1}. ${kw.word} - ${kw.count}x (${kw.density}%)`);
   });
   lines.push('');
 
-  lines.push('MOBILE');
+  lines.push(s('mobile'));
   lines.push('-'.repeat(30));
-  lines.push(`Viewport: ${result.mobile.hasViewport ? 'Yes' : 'No'}`);
-  lines.push(`Responsive Images: ${result.mobile.hasResponsiveImages ? 'Yes' : 'No'}`);
-  lines.push(`Media Queries: ${result.mobile.mediaQueries ? 'Yes' : 'No'}`);
+  lines.push(`${f('viewport')}: ${yesNo(result.mobile.hasViewport)}`);
+  lines.push(`${f('responsiveImages')}: ${yesNo(result.mobile.hasResponsiveImages)}`);
+  lines.push(`${f('mediaQueries')}: ${yesNo(result.mobile.mediaQueries)}`);
   lines.push('');
 
-  lines.push('ANCHOR TEXT');
+  lines.push(s('anchorText'));
   lines.push('-'.repeat(30));
-  lines.push(`Total: ${result.anchorText.total}`);
-  lines.push(`Descriptive: ${result.anchorText.descriptive}`);
-  lines.push(`Generic: ${result.anchorText.generic}`);
+  lines.push(`${f('total')}: ${result.anchorText.total}`);
+  lines.push(`${f('descriptive')}: ${result.anchorText.descriptive}`);
+  lines.push(`${f('generic')}: ${result.anchorText.generic}`);
   lines.push('');
 
-  lines.push('RESOURCE OPTIMIZATION');
+  lines.push(s('resourceOptimization'));
   lines.push('-'.repeat(30));
   lines.push(
-    `Scripts Minified: ${result.resourceOptimization.minifiedScripts}/${result.resourceOptimization.totalScripts}`,
+    `${f('scriptsMinified')}: ${result.resourceOptimization.minifiedScripts}/${result.resourceOptimization.totalScripts}`,
   );
   lines.push(
-    `Stylesheets Minified: ${result.resourceOptimization.minifiedStylesheets}/${result.resourceOptimization.totalStylesheets}`,
+    `${f('stylesheetsMinified')}: ${result.resourceOptimization.minifiedStylesheets}/${result.resourceOptimization.totalStylesheets}`,
   );
-  lines.push(`Print Styles: ${result.resourceOptimization.hasPrintStyles ? 'Yes' : 'No'}`);
+  lines.push(`${f('printStyles')}: ${yesNo(result.resourceOptimization.hasPrintStyles)}`);
   lines.push('');
 
-  lines.push('RENDERING');
+  lines.push(s('rendering'));
   lines.push('-'.repeat(30));
-  lines.push(`Type: ${result.rendering.renderingType}`);
-  lines.push(`Confidence: ${result.rendering.confidence}%`);
-  lines.push(`Noscript Fallback: ${result.rendering.hasNoscriptFallback ? 'Yes' : 'No'}`);
+  lines.push(`${f('type')}: ${result.rendering.renderingType}`);
+  lines.push(`${f('confidence')}: ${result.rendering.confidence}%`);
+  lines.push(`${f('noscriptFallback')}: ${yesNo(result.rendering.hasNoscriptFallback)}`);
   lines.push('');
 
-  lines.push('LAZY CONTENT');
+  lines.push(s('lazyContent'));
   lines.push('-'.repeat(30));
-  lines.push(`Infinite Scroll: ${result.lazyContent.hasInfiniteScroll ? 'Yes' : 'No'}`);
-  lines.push(`Lazy Images: ${result.lazyContent.lazyImageCount}`);
-  lines.push(`Pagination: ${result.lazyContent.hasPagination ? 'Yes' : 'No'}`);
+  lines.push(`${f('infiniteScroll')}: ${yesNo(result.lazyContent.hasInfiniteScroll)}`);
+  lines.push(`${f('lazyImages')}: ${result.lazyContent.lazyImageCount}`);
+  lines.push(`${f('pagination')}: ${yesNo(result.lazyContent.hasPagination)}`);
   lines.push('');
 
-  lines.push('SOCIAL SHARE');
+  lines.push(s('socialShare'));
   lines.push('-'.repeat(30));
-  lines.push(`Share Buttons: ${result.socialShare.hasShareButtons ? 'Yes' : 'No'}`);
+  lines.push(`${f('shareButtons')}: ${yesNo(result.socialShare.hasShareButtons)}`);
   const platforms = result.socialShare.platforms.filter((p) => p.detected).map((p) => p.platform);
-  lines.push(`Platforms: ${platforms.length > 0 ? platforms.join(', ') : 'None'}`);
+  lines.push(`${f('platforms')}: ${platforms.length > 0 ? platforms.join(', ') : r('none')}`);
   lines.push('');
 
-  lines.push('ACCESSIBILITY');
+  lines.push(s('accessibility'));
   lines.push('-'.repeat(30));
-  lines.push(`Score: ${result.accessibility.score}/100`);
-  lines.push(`Errors: ${result.accessibility.issues.filter((i) => i.type === 'error').length}`);
-  lines.push(`Warnings: ${result.accessibility.issues.filter((i) => i.type === 'warning').length}`);
-  lines.push(`Has Main Landmark: ${result.accessibility.landmarks.hasMain ? 'Yes' : 'No'}`);
+  lines.push(`${f('score')}: ${result.accessibility.score}/100`);
+  lines.push(
+    `${f('errors')}: ${result.accessibility.issues.filter((i) => i.type === 'error').length}`,
+  );
+  lines.push(
+    `${f('warnings')}: ${result.accessibility.issues.filter((i) => i.type === 'warning').length}`,
+  );
+  lines.push(`${f('hasMainLandmark')}: ${yesNo(result.accessibility.landmarks.hasMain)}`);
   lines.push('');
 
-  lines.push('CORE WEB VITALS (Estimated)');
+  lines.push(s('coreWebVitals'));
   lines.push('-'.repeat(30));
-  lines.push(`LCP: ${result.coreWebVitals.lcp.estimate}`);
-  lines.push(`CLS: ${result.coreWebVitals.cls.estimate}`);
-  lines.push(`FID: ${result.coreWebVitals.fid.estimate}`);
-  lines.push(`INP: ${result.coreWebVitals.inp.estimate}`);
+  lines.push(`${f('lcp')}: ${result.coreWebVitals.lcp.estimate}`);
+  lines.push(`${f('cls')}: ${result.coreWebVitals.cls.estimate}`);
+  lines.push(`${f('fid')}: ${result.coreWebVitals.fid.estimate}`);
+  lines.push(`${f('inp')}: ${result.coreWebVitals.inp.estimate}`);
   lines.push('');
 
   if (result.coreWebVitals.recommendations.length > 0) {
-    lines.push('RECOMMENDATIONS');
+    lines.push(s('recommendations'));
     lines.push('-'.repeat(30));
     result.coreWebVitals.recommendations.forEach((rec, i) => {
       lines.push(`${i + 1}. ${rec}`);
@@ -385,15 +392,14 @@ export function exportAsPdf(result: SeoAnalysisResult): void {
  * Generates styled HTML for PDF export.
  */
 function generatePdfHtml(result: SeoAnalysisResult): string {
-  const scoreColor =
-    result.overallScore >= 80 ? '#22c55e' : result.overallScore >= 50 ? '#f59e0b' : '#ef4444';
+  const scoreColor = getScoreColorHex(result.overallScore);
   const platforms = result.socialShare.platforms.filter((p) => p.detected).map((p) => p.platform);
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SEO Report - ${result.url}</title>
+  <title>SEO Report - ${escapeHtml(result.url)}</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1f2937; line-height: 1.5; padding: 40px; max-width: 800px; margin: 0 auto; }
@@ -421,7 +427,7 @@ function generatePdfHtml(result: SeoAnalysisResult): string {
 <body>
   <div class="header">
     <h1>SEO Analysis Report</h1>
-    <p class="url">${result.url}</p>
+    <p class="url">${escapeHtml(result.url)}</p>
     <p class="date">Generated: ${new Date(result.analyzedAt).toLocaleString()}</p>
     <div class="score-box">
       <div class="score">${result.overallScore}</div>
@@ -431,11 +437,11 @@ function generatePdfHtml(result: SeoAnalysisResult): string {
 
   <div class="section">
     <h2>Meta Tags</h2>
-    <div class="item"><span class="item-label">Title</span><span class="item-value">${result.meta.title.value || 'Missing'}</span></div>
+    <div class="item"><span class="item-label">Title</span><span class="item-value">${escapeHtml(String(result.meta.title.value || 'Missing'))}</span></div>
     <div class="item"><span class="item-label">Title Length</span><span class="item-value">${result.meta.title.length} characters</span></div>
-    <div class="item"><span class="item-label">Description</span><span class="item-value">${result.meta.description.value ? String(result.meta.description.value).slice(0, 80) + '...' : 'Missing'}</span></div>
+    <div class="item"><span class="item-label">Description</span><span class="item-value">${escapeHtml(result.meta.description.value ? String(result.meta.description.value).slice(0, 80) + '...' : 'Missing')}</span></div>
     <div class="item"><span class="item-label">Description Length</span><span class="item-value">${result.meta.description.length} characters</span></div>
-    <div class="item"><span class="item-label">Canonical</span><span class="item-value">${result.meta.canonical.value || 'Not set'}</span></div>
+    <div class="item"><span class="item-label">Canonical</span><span class="item-value">${escapeHtml(String(result.meta.canonical.value || 'Not set'))}</span></div>
   </div>
 
   <div class="section">
@@ -549,7 +555,7 @@ function generatePdfHtml(result: SeoAnalysisResult): string {
     <h2>Top Keywords</h2>
     ${result.keywords.topKeywords
       .slice(0, 10)
-      .map((kw) => `<span class="tag">${kw.word} (${kw.count}x)</span>`)
+      .map((kw) => `<span class="tag">${escapeHtml(kw.word)} (${kw.count}x)</span>`)
       .join('')}
   </div>
 
@@ -559,7 +565,7 @@ function generatePdfHtml(result: SeoAnalysisResult): string {
   <div class="section">
     <h2>Recommendations</h2>
     <ul style="padding-left: 20px;">
-      ${result.coreWebVitals.recommendations.map((rec) => `<li style="margin-bottom: 8px;">${rec}</li>`).join('')}
+      ${result.coreWebVitals.recommendations.map((rec) => `<li style="margin-bottom: 8px;">${escapeHtml(rec)}</li>`).join('')}
     </ul>
   </div>
   `
@@ -594,6 +600,20 @@ function getDomainSlug(url: string): string {
   } catch {
     return 'unknown';
   }
+}
+
+/**
+ * Escapes HTML entities to prevent XSS.
+ */
+function escapeHtml(str: string): string {
+  const htmlEntities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return str.replace(/[&<>"']/g, (char) => htmlEntities[char] ?? char);
 }
 
 /**

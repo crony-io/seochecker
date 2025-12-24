@@ -233,7 +233,10 @@
       "viewport": "Viewport",
       "canonical": "Canónico",
       "language": "Idioma",
-      "urlLength": "Longitud URL"
+      "urlLength": "Longitud URL",
+      "https": "HTTPS",
+      "doctype": "DOCTYPE",
+      "favicon": "Favicon"
     },
     "performance": {
       "title": "Rendimiento",
@@ -282,7 +285,105 @@
       "pdf": "Descargar PDF",
       "json": "Descargar JSON",
       "csv": "Descargar CSV",
-      "generating": "Generando..."
+      "generating": "Generando...",
+      "report": {
+        "title": "INFORME DE ANÁLISIS SEO",
+        "url": "URL",
+        "analyzed": "Analizado",
+        "overallScore": "Puntuación General",
+        "generated": "Generado",
+        "yes": "Sí",
+        "no": "No",
+        "missing": "Faltante",
+        "notSet": "No definido",
+        "none": "Ninguno",
+        "chars": "caracteres",
+        "sections": {
+          "metaTags": "META ETIQUETAS",
+          "headings": "ENCABEZADOS",
+          "content": "CONTENIDO",
+          "images": "IMÁGENES",
+          "links": "ENLACES",
+          "technical": "TÉCNICO",
+          "topKeywords": "PALABRAS CLAVE PRINCIPALES",
+          "mobile": "MÓVIL",
+          "anchorText": "TEXTO ANCLA",
+          "resourceOptimization": "OPTIMIZACIÓN DE RECURSOS",
+          "rendering": "RENDERIZADO",
+          "lazyContent": "CONTENIDO DIFERIDO",
+          "socialShare": "COMPARTIR EN REDES",
+          "accessibility": "ACCESIBILIDAD",
+          "coreWebVitals": "CORE WEB VITALS (Estimado)",
+          "recommendations": "RECOMENDACIONES",
+          "contentAnalysis": "Análisis de Contenido",
+          "performance": "Rendimiento",
+          "socialShareBtn": "Compartir en Redes"
+        },
+        "fields": {
+          "title": "Título",
+          "titleLength": "Longitud del Título",
+          "description": "Descripción",
+          "descriptionLength": "Longitud de Descripción",
+          "canonical": "Canónica",
+          "h1Count": "Cantidad de H1",
+          "totalHeadings": "Total de Encabezados",
+          "properHierarchy": "Jerarquía Correcta",
+          "wordCount": "Conteo de Palabras",
+          "readingTime": "Tiempo de Lectura",
+          "textHtmlRatio": "Ratio Texto/HTML",
+          "paragraphs": "Párrafos",
+          "total": "Total",
+          "missingAlt": "Alt Faltante",
+          "lazyLoading": "Carga Diferida",
+          "internal": "Internos",
+          "external": "Externos",
+          "nofollow": "Nofollow",
+          "https": "HTTPS",
+          "doctype": "Doctype",
+          "viewport": "Viewport",
+          "charset": "Charset",
+          "responsiveImages": "Imágenes Responsivas",
+          "mediaQueries": "Media Queries",
+          "descriptive": "Descriptivos",
+          "generic": "Genéricos",
+          "scriptsMinified": "Scripts Minificados",
+          "stylesheetsMinified": "Hojas de Estilo Minificadas",
+          "printStyles": "Estilos de Impresión",
+          "type": "Tipo",
+          "confidence": "Confianza",
+          "noscriptFallback": "Fallback Noscript",
+          "infiniteScroll": "Scroll Infinito",
+          "lazyImages": "Imágenes Diferidas",
+          "pagination": "Paginación",
+          "shareButtons": "Botones de Compartir",
+          "platforms": "Plataformas",
+          "score": "Puntuación",
+          "errors": "Errores",
+          "warnings": "Advertencias",
+          "hasMainLandmark": "Tiene Landmark Principal",
+          "lcp": "LCP",
+          "cls": "CLS",
+          "fid": "FID",
+          "inp": "INP",
+          "htmlSize": "Tamaño HTML",
+          "domElements": "Elementos DOM",
+          "domDepth": "Profundidad DOM",
+          "main": "Principal",
+          "nav": "Navegación",
+          "header": "Cabecera",
+          "footer": "Pie de página",
+          "landmarks": "Landmarks",
+          "noneDetected": "Ninguno detectado"
+        },
+        "csv": {
+          "category": "Categoría",
+          "metric": "Métrica",
+          "value": "Valor",
+          "status": "Estado",
+          "general": "General",
+          "analyzedAt": "Analizado En"
+        }
+      }
     },
     "checklist": {
       "title": "Lista de Verificación SEO",
@@ -290,7 +391,36 @@
       "important": "Importante",
       "optional": "Opcional",
       "completed": "completados",
-      "pending": "pendientes"
+      "pending": "pendientes",
+      "items": {
+        "hasTitle": "La página tiene etiqueta title",
+        "titleOptimal": "La longitud del título es óptima (30-60 caracteres)",
+        "hasDescription": "La página tiene meta descripción",
+        "hasH1": "La página tiene exactamente un H1",
+        "hasViewport": "La etiqueta meta viewport está definida",
+        "descriptionOptimal": "La longitud de la descripción es óptima (120-160 caracteres)",
+        "hasCanonical": "La URL canónica está definida",
+        "properHierarchy": "La jerarquía de encabezados es correcta",
+        "imagesHaveAlt": "Todas las imágenes tienen atributo alt",
+        "usesHttps": "La página usa HTTPS",
+        "hasOgTags": "Las etiquetas Open Graph están definidas",
+        "hasTwitterCards": "Las etiquetas Twitter Card están definidas",
+        "hasLangAttr": "El atributo lang de HTML está definido",
+        "hasFavicon": "El favicon está presente",
+        "hasContentLength": "El contenido tiene longitud suficiente (300+ palabras)",
+        "usesLazyLoading": "Las imágenes usan carga diferida"
+      },
+      "details": {
+        "characters": "{count} caracteres",
+        "missingTitle": "Falta la etiqueta title",
+        "missingDescription": "Falta la meta descripción",
+        "h1Count": "{count} etiqueta(s) H1 encontrada(s)",
+        "noGaps": "Sin saltos detectados",
+        "hasGaps": "La jerarquía tiene saltos",
+        "missingAlt": "{count} imagen(es) sin alt",
+        "words": "{count} palabras",
+        "lazyImages": "{lazy}/{total} imágenes"
+      }
     },
     "readingLevel": {
       "title": "Nivel de Lectura",
@@ -328,7 +458,9 @@
       "compare": "Comparar",
       "analyzing": "Analizando...",
       "metric": "Métrica",
-      "overallScore": "Puntuación General"
+      "overallScore": "Puntuación General",
+      "invalidUrl": "URL inválida",
+      "analysisFailed": "El análisis falló"
     },
     "resourceHints": {
       "title": "Sugerencias de Recursos",
@@ -400,7 +532,18 @@
       "noIssues": "Sin problemas detectados",
       "viewContent": "Ver Contenido",
       "seconds": "segundos",
-      "description": "Robots.txt controla el acceso de rastreadores. Los sitemaps ayudan a los motores de búsqueda a descubrir páginas."
+      "description": "Robots.txt controla el acceso de rastreadores. Los sitemaps ayudan a los motores de búsqueda a descubrir páginas.",
+      "analyzers": {
+        "invalidUrl": "URL inválida",
+        "notAccessible": "robots.txt no encontrado o inaccesible",
+        "returnsHtml": "robots.txt devuelve HTML (posiblemente página 404)",
+        "blockingAll": "El sitio bloquea todos los rastreadores con \"Disallow: /\"",
+        "noSitemap": "No hay sitemap referenciado en robots.txt",
+        "noGenericAgent": "No hay reglas para user-agent genérico (*)",
+        "sitemapInvalidXml": "El sitemap de robots.txt no es XML válido: {url}",
+        "sitemapNotAccessible": "El sitemap de robots.txt no es accesible: {url}",
+        "noSitemapFound": "No se encontró sitemap accesible"
+      }
     },
     "security": {
       "title": "Análisis de Seguridad",
@@ -414,6 +557,15 @@
         "upgradeInsecure": "Upgrade Insecure Requests",
         "present": "Presente",
         "missing": "Faltante"
+      },
+      "analyzers": {
+        "invalidUrl": "URL inválida",
+        "notHttps": "El sitio no usa HTTPS",
+        "mixedContent": "{count} recurso(s) de contenido mixto detectado(s)",
+        "noUpgradeInsecure": "Sin directiva upgrade-insecure-requests",
+        "formInsecure": "El formulario {id} envía a URL HTTP insegura",
+        "formNoHttps": "El formulario {id} con datos sensibles no usa acción HTTPS",
+        "formNoProtection": "El formulario {id} con campo de contraseña carece de protección CSRF"
       },
       "headers": {
         "title": "Headers de Seguridad",
@@ -460,7 +612,17 @@
       "uppercase": "Contiene mayúsculas",
       "specialChars": "Caracteres especiales",
       "keywords": "Palabras clave en URL",
-      "description": "URLs limpias y legibles ayudan a los motores de búsqueda y usuarios a entender el contenido."
+      "description": "URLs limpias y legibles ayudan a los motores de búsqueda y usuarios a entender el contenido.",
+      "analyzers": {
+        "invalidUrl": "Formato de URL inválido",
+        "tooLong": "La longitud de URL ({length}) excede los {max} caracteres recomendados",
+        "tooDeep": "La profundidad de ruta ({depth}) excede los {max} niveles recomendados",
+        "hasUnderscores": "La URL contiene guiones bajos - usa guiones para SEO",
+        "hasUppercase": "La URL contiene mayúsculas - usa minúsculas para consistencia",
+        "hasSpecialChars": "La URL contiene caracteres especiales que pueden causar problemas",
+        "longSegments": "{count} segmento(s) de URL exceden {max} caracteres",
+        "manyParams": "La URL tiene {count} parámetros - considera URLs más limpias"
+      }
     },
     "embeddedContent": {
       "title": "Contenido Embebido",
@@ -483,7 +645,24 @@
       "poster": "Imagen de portada",
       "responsive": "Responsivo",
       "issues": "Problemas",
-      "description": "El contenido embebido debe ser accesible y optimizado para el rendimiento."
+      "description": "El contenido embebido debe ser accesible y optimizado para el rendimiento.",
+      "analyzers": {
+        "iframeMissingTitle": "Falta atributo title para accesibilidad",
+        "iframeMissingSandbox": "Considera agregar atributo sandbox para seguridad",
+        "iframesMissingTitle": "{count} iframe(s) sin atributo title",
+        "iframesNoLazyLoading": "{count} iframe(s) sin carga diferida",
+        "videoMissingControls": "Falta atributo controls",
+        "videoAutoplayNoMute": "Autoplay sin silencio puede no funcionar en navegadores modernos",
+        "videoNoCaptions": "Sin subtítulos para accesibilidad",
+        "videoNoPoster": "Falta imagen de portada",
+        "videosNoControls": "{count} video(s) sin controles",
+        "videosAutoplay": "{count} video(s) con autoplay (puede no funcionar)",
+        "videosNoCaptions": "{count} video(s) sin subtítulos",
+        "audioMissingControls": "Falta atributo controls",
+        "audioAutoplay": "Autoplay puede molestar a los usuarios",
+        "audiosNoControls": "{count} elemento(s) de audio sin controles",
+        "audiosAutoplay": "{count} elemento(s) de audio con autoplay"
+      }
     },
     "analyzers": {
       "meta": {

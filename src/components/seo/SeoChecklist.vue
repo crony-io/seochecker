@@ -26,43 +26,43 @@ const checklistItems = computed<ChecklistItem[]>(() => {
   // Critical items
   items.push({
     id: 'title',
-    label: 'Page has a title tag',
+    label: t('seo.checklist.items.hasTitle'),
     status: props.result.meta.title.value ? 'good' : 'error',
     priority: 'critical',
     details: props.result.meta.title.value
-      ? `${props.result.meta.title.length} characters`
-      : 'Missing title tag',
+      ? t('seo.checklist.details.characters', { count: props.result.meta.title.length })
+      : t('seo.checklist.details.missingTitle'),
   });
 
   items.push({
     id: 'title-length',
-    label: 'Title length is optimal (30-60 chars)',
+    label: t('seo.checklist.items.titleOptimal'),
     status: props.result.meta.title.status,
     priority: 'critical',
-    details: `${props.result.meta.title.length} characters`,
+    details: t('seo.checklist.details.characters', { count: props.result.meta.title.length }),
   });
 
   items.push({
     id: 'description',
-    label: 'Page has a meta description',
+    label: t('seo.checklist.items.hasDescription'),
     status: props.result.meta.description.value ? 'good' : 'error',
     priority: 'critical',
     details: props.result.meta.description.value
-      ? `${props.result.meta.description.length} characters`
-      : 'Missing meta description',
+      ? t('seo.checklist.details.characters', { count: props.result.meta.description.length })
+      : t('seo.checklist.details.missingDescription'),
   });
 
   items.push({
     id: 'h1',
-    label: 'Page has exactly one H1 tag',
+    label: t('seo.checklist.items.hasH1'),
     status: props.result.headings.h1Count === 1 ? 'good' : 'error',
     priority: 'critical',
-    details: `${props.result.headings.h1Count} H1 tag(s) found`,
+    details: t('seo.checklist.details.h1Count', { count: props.result.headings.h1Count }),
   });
 
   items.push({
     id: 'viewport',
-    label: 'Viewport meta tag is set',
+    label: t('seo.checklist.items.hasViewport'),
     status: props.result.technical.hasViewport ? 'good' : 'error',
     priority: 'critical',
   });
@@ -70,45 +70,45 @@ const checklistItems = computed<ChecklistItem[]>(() => {
   // Important items
   items.push({
     id: 'description-length',
-    label: 'Description length is optimal (120-160 chars)',
+    label: t('seo.checklist.items.descriptionOptimal'),
     status: props.result.meta.description.status,
     priority: 'important',
-    details: `${props.result.meta.description.length} characters`,
+    details: t('seo.checklist.details.characters', { count: props.result.meta.description.length }),
   });
 
   items.push({
     id: 'canonical',
-    label: 'Canonical URL is set',
+    label: t('seo.checklist.items.hasCanonical'),
     status: props.result.technical.hasCanonical ? 'good' : 'warning',
     priority: 'important',
   });
 
   items.push({
     id: 'heading-hierarchy',
-    label: 'Heading hierarchy is proper',
+    label: t('seo.checklist.items.properHierarchy'),
     status: props.result.headings.hasProperHierarchy ? 'good' : 'warning',
     priority: 'important',
-    details: props.result.headings.hasProperHierarchy ? 'No gaps detected' : 'Hierarchy has gaps',
+    details: props.result.headings.hasProperHierarchy ? t('seo.checklist.details.noGaps') : t('seo.checklist.details.hasGaps'),
   });
 
   items.push({
     id: 'images-alt',
-    label: 'All images have alt attributes',
+    label: t('seo.checklist.items.imagesHaveAlt'),
     status: props.result.images.withoutAlt === 0 ? 'good' : 'warning',
     priority: 'important',
-    details: `${props.result.images.withoutAlt} image(s) missing alt`,
+    details: t('seo.checklist.details.missingAlt', { count: props.result.images.withoutAlt }),
   });
 
   items.push({
     id: 'https',
-    label: 'Page uses HTTPS',
+    label: t('seo.checklist.items.usesHttps'),
     status: props.result.technical.isHttps ? 'good' : 'error',
     priority: 'important',
   });
 
   items.push({
     id: 'og-tags',
-    label: 'Open Graph tags are set',
+    label: t('seo.checklist.items.hasOgTags'),
     status: props.result.meta.openGraph.status,
     priority: 'important',
   });
@@ -116,43 +116,43 @@ const checklistItems = computed<ChecklistItem[]>(() => {
   // Optional items
   items.push({
     id: 'twitter-cards',
-    label: 'Twitter Card tags are set',
+    label: t('seo.checklist.items.hasTwitterCards'),
     status: props.result.meta.twitterCard.status,
     priority: 'optional',
   });
 
   items.push({
     id: 'language',
-    label: 'HTML lang attribute is set',
+    label: t('seo.checklist.items.hasLangAttr'),
     status: props.result.technical.hasLanguage ? 'good' : 'info',
     priority: 'optional',
   });
 
   items.push({
     id: 'favicon',
-    label: 'Favicon is present',
+    label: t('seo.checklist.items.hasFavicon'),
     status: props.result.technical.hasFavicon ? 'good' : 'info',
     priority: 'optional',
   });
 
   items.push({
     id: 'content-length',
-    label: 'Content has sufficient length (300+ words)',
+    label: t('seo.checklist.items.hasContentLength'),
     status: props.result.content.wordCount >= 300 ? 'good' : 'warning',
     priority: 'optional',
-    details: `${props.result.content.wordCount} words`,
+    details: t('seo.checklist.details.words', { count: props.result.content.wordCount }),
   });
 
   items.push({
     id: 'lazy-loading',
-    label: 'Images use lazy loading',
+    label: t('seo.checklist.items.usesLazyLoading'),
     status:
       props.result.images.total === 0 ||
       props.result.images.withLazyLoading / props.result.images.total > 0.5
         ? 'good'
         : 'info',
     priority: 'optional',
-    details: `${props.result.images.withLazyLoading}/${props.result.images.total} images`,
+    details: t('seo.checklist.details.lazyImages', { lazy: props.result.images.withLazyLoading, total: props.result.images.total }),
   });
 
   return items;

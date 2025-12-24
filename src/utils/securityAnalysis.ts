@@ -2,7 +2,9 @@
  * @fileoverview Security analysis utilities for checking HTTPS, headers, and forms.
  */
 
+import { SECURITY_FETCH_TIMEOUT } from '@/constants/seo';
 import type { SeoStatus } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 // =============================================================================
 // TYPES
@@ -109,7 +111,7 @@ const CSRF_TOKEN_NAMES = [
   'csrfmiddlewaretoken',
 ] as const;
 
-const FETCH_TIMEOUT = 5000;
+// Timeout constant imported from @/constants/seo as SECURITY_FETCH_TIMEOUT
 
 // =============================================================================
 // HTTPS ANALYSIS
@@ -129,7 +131,7 @@ export function analyzeHttps(url: string, doc: Document): HttpsAnalysis {
       mixedContentCount: 0,
       mixedContent: [],
       hasUpgradeInsecureRequests: false,
-      issues: ['Invalid URL'],
+      issues: [t('seo.security.analyzers.invalidUrl')],
       status: 'error',
     };
   }
@@ -204,15 +206,15 @@ export function analyzeHttps(url: string, doc: Document): HttpsAnalysis {
   const issues: string[] = [];
 
   if (!usesHttps) {
-    issues.push('Site does not use HTTPS - insecure for users');
+    issues.push(t('seo.security.analyzers.notHttps'));
   }
 
   if (mixedContent.length > 0) {
-    issues.push(`${mixedContent.length} mixed content resource(s) found (HTTP on HTTPS page)`);
+    issues.push(t('seo.security.analyzers.mixedContent', { count: mixedContent.length }));
   }
 
   if (usesHttps && !hasUpgradeInsecureRequests && mixedContent.length > 0) {
-    issues.push('Consider adding upgrade-insecure-requests CSP directive');
+    issues.push(t('seo.security.analyzers.noUpgradeInsecure'));
   }
 
   let status: SeoStatus = 'good';
@@ -282,7 +284,7 @@ export async function analyzeSecurityHeaders(url: string): Promise<SecurityHeade
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+    const timeoutId = setTimeout(() => controller.abort(), SECURITY_FETCH_TIMEOUT);
 
     const response = await fetch(url, {
       method: 'HEAD',
@@ -406,7 +408,7 @@ export function analyzeFormSecurity(url: string, doc: Document): FormsSecurityAn
       formsWithSensitiveData: 0,
       criticalIssues: 0,
       forms: [],
-      issues: ['Invalid URL'],
+      issues: [t('seo.security.analyzers.invalidUrl')],
       status: 'error',
     };
   }

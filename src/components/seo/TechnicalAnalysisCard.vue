@@ -22,7 +22,7 @@ const { t } = useI18n();
           aria-hidden="true"
         />
         <div>
-          <p class="text-sm font-medium text-body">HTTPS</p>
+          <p class="text-sm font-medium text-body">{{ t('seo.technical.https') }}</p>
           <p class="text-xs text-muted">
             {{ technical.isHttps ? t('seo.technical.secure') : t('seo.technical.notSecure') }}
           </p>
@@ -36,7 +36,7 @@ const { t } = useI18n();
           aria-hidden="true"
         />
         <div>
-          <p class="text-sm font-medium text-body">DOCTYPE</p>
+          <p class="text-sm font-medium text-body">{{ t('seo.technical.doctype') }}</p>
           <p class="text-xs text-muted">
             {{ technical.hasDoctype ? t('seo.technical.present') : t('seo.technical.missing') }}
           </p>
@@ -106,7 +106,7 @@ const { t } = useI18n();
           aria-hidden="true"
         />
         <div>
-          <p class="text-sm font-medium text-body">Favicon</p>
+          <p class="text-sm font-medium text-body">{{ t('seo.technical.favicon') }}</p>
           <p class="text-xs text-muted">
             {{ technical.hasFavicon ? t('seo.technical.present') : t('seo.technical.notFound') }}
           </p>

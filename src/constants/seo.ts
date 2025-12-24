@@ -210,3 +210,81 @@ export const INLINE_SCRIPT_SIZE_MAX = 50000;
 
 /** Large HTML size threshold */
 export const HTML_SIZE_LARGE = 100000;
+
+// =============================================================================
+// URL ANALYSIS
+// =============================================================================
+
+/** Maximum recommended URL length */
+export const MAX_URL_LENGTH = 100;
+
+/** Maximum recommended path depth */
+export const MAX_PATH_DEPTH = 4;
+
+/** Maximum recommended URL segment length */
+export const MAX_SEGMENT_LENGTH = 30;
+
+// =============================================================================
+// TIMEOUTS
+// =============================================================================
+
+/** Default toast notification duration in milliseconds */
+export const TOAST_DEFAULT_DURATION = 3500;
+
+/** Fetch timeout for security analysis in milliseconds */
+export const SECURITY_FETCH_TIMEOUT = 5000;
+
+// =============================================================================
+// SCORE DISPLAY
+// =============================================================================
+
+/** Score threshold for good status (green) */
+export const SCORE_THRESHOLD_GOOD = 80;
+
+/** Score threshold for warning status (yellow) */
+export const SCORE_THRESHOLD_WARNING = 60;
+
+/** Score threshold for poor status (orange) */
+export const SCORE_THRESHOLD_POOR = 40;
+
+/** Score color type for Tailwind CSS classes */
+export type ScoreColorClass =
+  | 'text-green-500'
+  | 'text-yellow-500'
+  | 'text-orange-500'
+  | 'text-red-500';
+
+/** Score color type for hex values */
+export type ScoreColorHex = '#22c55e' | '#f59e0b' | '#f97316' | '#ef4444';
+
+/**
+ * Gets the Tailwind CSS color class for a score.
+ */
+export function getScoreColorClass(score: number): ScoreColorClass {
+  if (score >= SCORE_THRESHOLD_GOOD) {
+    return 'text-green-500';
+  }
+  if (score >= SCORE_THRESHOLD_WARNING) {
+    return 'text-yellow-500';
+  }
+  if (score >= SCORE_THRESHOLD_POOR) {
+    return 'text-orange-500';
+  }
+  return 'text-red-500';
+}
+
+/**
+ * Gets the hex color for a score (for use in inline styles/PDF).
+ */
+export function getScoreColorHex(score: number): ScoreColorHex {
+  if (score >= SCORE_THRESHOLD_GOOD) {
+    return '#22c55e';
+  }
+  if (score >= SCORE_THRESHOLD_WARNING) {
+    return '#f59e0b';
+  }
+  if (score >= SCORE_THRESHOLD_POOR) {
+    return '#f97316';
+  }
+  return '#ef4444';
+}

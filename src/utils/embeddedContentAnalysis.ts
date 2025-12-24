@@ -3,6 +3,7 @@
  */
 
 import type { SeoStatus } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 // =============================================================================
 // TYPES
@@ -126,7 +127,7 @@ function analyzeIframes(doc: Document): EmbeddedContentAnalysis['iframes'] {
 
     // Check for title (accessibility)
     if (!title) {
-      issues.push('Missing title attribute for accessibility');
+      issues.push(t('seo.embeddedContent.analyzers.iframeMissingTitle'));
       withoutTitle++;
     }
 
@@ -137,7 +138,7 @@ function analyzeIframes(doc: Document): EmbeddedContentAnalysis['iframes'] {
 
     // Check for sandbox attribute (security)
     if (!sandbox && src.startsWith('http')) {
-      issues.push('Consider adding sandbox attribute for security');
+      issues.push(t('seo.embeddedContent.analyzers.iframeMissingSandbox'));
     }
 
     // Check if responsive
@@ -162,10 +163,10 @@ function analyzeIframes(doc: Document): EmbeddedContentAnalysis['iframes'] {
 
   // Global issues
   if (withoutTitle > 0) {
-    globalIssues.push(`${withoutTitle} iframe(s) missing title attribute`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.iframesMissingTitle', { count: withoutTitle }));
   }
   if (withoutLazyLoading > 0) {
-    globalIssues.push(`${withoutLazyLoading} iframe(s) without lazy loading`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.iframesNoLazyLoading', { count: withoutLazyLoading }));
   }
 
   // Determine status
@@ -218,25 +219,25 @@ function analyzeVideos(doc: Document): EmbeddedContentAnalysis['videos'] {
 
     // Check for controls
     if (!hasControls) {
-      issues.push('Missing controls attribute');
+      issues.push(t('seo.embeddedContent.analyzers.videoMissingControls'));
       withoutControls++;
     }
 
     // Check for autoplay without mute
     if (hasAutoplay && !isMuted) {
-      issues.push('Autoplay without mute may not work in modern browsers');
+      issues.push(t('seo.embeddedContent.analyzers.videoAutoplayNoMute'));
       withAutoplay++;
     }
 
     // Check for captions (accessibility)
     if (!hasCaptions) {
-      issues.push('No captions/subtitles for accessibility');
+      issues.push(t('seo.embeddedContent.analyzers.videoNoCaptions'));
       withoutCaptions++;
     }
 
     // Check for poster image
     if (!poster) {
-      issues.push('Missing poster image');
+      issues.push(t('seo.embeddedContent.analyzers.videoNoPoster'));
     }
 
     items.push({
@@ -255,13 +256,13 @@ function analyzeVideos(doc: Document): EmbeddedContentAnalysis['videos'] {
 
   // Global issues
   if (withoutControls > 0) {
-    globalIssues.push(`${withoutControls} video(s) without controls`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.videosNoControls', { count: withoutControls }));
   }
   if (withAutoplay > 0) {
-    globalIssues.push(`${withAutoplay} video(s) with autoplay (may not work)`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.videosAutoplay', { count: withAutoplay }));
   }
   if (withoutCaptions > 0) {
-    globalIssues.push(`${withoutCaptions} video(s) without captions`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.videosNoCaptions', { count: withoutCaptions }));
   }
 
   // Determine status
@@ -308,13 +309,13 @@ function analyzeAudios(doc: Document): EmbeddedContentAnalysis['audios'] {
 
     // Check for controls
     if (!hasControls) {
-      issues.push('Missing controls attribute');
+      issues.push(t('seo.embeddedContent.analyzers.audioMissingControls'));
       withoutControls++;
     }
 
     // Check for autoplay
     if (hasAutoplay) {
-      issues.push('Autoplay may annoy users');
+      issues.push(t('seo.embeddedContent.analyzers.audioAutoplay'));
       withAutoplay++;
     }
 
@@ -332,10 +333,10 @@ function analyzeAudios(doc: Document): EmbeddedContentAnalysis['audios'] {
 
   // Global issues
   if (withoutControls > 0) {
-    globalIssues.push(`${withoutControls} audio element(s) without controls`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.audiosNoControls', { count: withoutControls }));
   }
   if (withAutoplay > 0) {
-    globalIssues.push(`${withAutoplay} audio element(s) with autoplay`);
+    globalIssues.push(t('seo.embeddedContent.analyzers.audiosAutoplay', { count: withAutoplay }));
   }
 
   // Determine status

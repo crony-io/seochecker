@@ -18,29 +18,7 @@ import {
   parseHtml,
 } from '@/composables/useHtmlParser';
 
-// Re-export all analyzers
-export { analyzeMeta } from '@/analyzers/meta';
-export { analyzeHeadings } from '@/analyzers/headings';
-export { analyzeImages } from '@/analyzers/images';
-export { analyzeLinks } from '@/analyzers/links';
-export { analyzeContent } from '@/analyzers/content';
-export { analyzeKeywords } from '@/analyzers/keywords';
-export { analyzePerformance } from '@/analyzers/performance';
-export { analyzeTechnical } from '@/analyzers/technical';
-export { analyzeStructuredData, extractSchemaPreviews } from '@/analyzers/structuredData';
-export { analyzeResourceHints } from '@/analyzers/resourceHints';
-export { analyzeSocialAnalytics } from '@/analyzers/socialAnalytics';
-export { analyzeAnchorText } from '@/analyzers/anchorText';
-export { analyzeMobile } from '@/analyzers/mobile';
-export { calculateOverallScore } from '@/analyzers/scoring';
-export { analyzeResourceOptimization } from '@/analyzers/resourceOptimization';
-export { analyzeRendering } from '@/analyzers/rendering';
-export { analyzeLazyContent } from '@/analyzers/lazyContent';
-export { analyzeSocialShare } from '@/analyzers/socialShare';
-export { analyzeAccessibility } from '@/analyzers/accessibility';
-export { analyzeCoreWebVitals } from '@/analyzers/coreWebVitals';
-
-// Import for internal use
+// Import all analyzers (also re-exported below)
 import { analyzeMeta } from '@/analyzers/meta';
 import { analyzeHeadings } from '@/analyzers/headings';
 import { analyzeImages } from '@/analyzers/images';
@@ -59,8 +37,33 @@ import { analyzeResourceOptimization } from '@/analyzers/resourceOptimization';
 import { analyzeRendering } from '@/analyzers/rendering';
 import { analyzeLazyContent } from '@/analyzers/lazyContent';
 import { analyzeSocialShare } from '@/analyzers/socialShare';
-import { analyzeAccessibility } from '@/analyzers/accessibility';
-import { analyzeCoreWebVitals } from '@/analyzers/coreWebVitals';
+import { analyzeAccessibility } from '@/analyzers/accessibility/index';
+import { analyzeCoreWebVitals } from '@/analyzers/coreWebVitals/index';
+
+// Re-export all analyzers for external use
+export {
+  analyzeMeta,
+  analyzeHeadings,
+  analyzeImages,
+  analyzeLinks,
+  analyzeContent,
+  analyzeKeywords,
+  analyzePerformance,
+  analyzeTechnical,
+  analyzeStructuredData,
+  extractSchemaPreviews,
+  analyzeResourceHints,
+  analyzeSocialAnalytics,
+  analyzeAnchorText,
+  analyzeMobile,
+  calculateOverallScore,
+  analyzeResourceOptimization,
+  analyzeRendering,
+  analyzeLazyContent,
+  analyzeSocialShare,
+  analyzeAccessibility,
+  analyzeCoreWebVitals,
+};
 
 /**
  * Performs complete SEO analysis on HTML content.

@@ -144,8 +144,10 @@ export function extractJsonLd(doc: Document): unknown[] {
       if (content) {
         data.push(JSON.parse(content));
       }
-    } catch {
-      // Invalid JSON, skip
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('[HTML Parser] Invalid JSON-LD found, skipping:', error);
+      }
     }
   });
 

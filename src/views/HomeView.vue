@@ -57,18 +57,7 @@
             <span class="text-xs text-muted">
               {{ new Date(item.analyzedAt).toLocaleDateString() }}
             </span>
-            <span
-              :class="[
-                'text-sm font-bold',
-                item.overallScore >= 80
-                  ? 'text-green-500'
-                  : item.overallScore >= 60
-                    ? 'text-yellow-500'
-                    : item.overallScore >= 40
-                      ? 'text-orange-500'
-                      : 'text-red-500',
-              ]"
-            >
+            <span :class="['text-sm font-bold', getScoreColorClass(item.overallScore)]">
               {{ item.overallScore }}
             </span>
           </div>
@@ -91,6 +80,7 @@ import AnalysisResults from '@/components/seo/AnalysisResults.vue';
 import ComparisonView from '@/components/seo/ComparisonView.vue';
 import LoadingSkeleton from '@/components/seo/LoadingSkeleton.vue';
 import UrlInput from '@/components/seo/UrlInput.vue';
+import { getScoreColorClass } from '@/constants/seo';
 import { useSeoStore } from '@/stores/seo';
 
 const { t } = useI18n();

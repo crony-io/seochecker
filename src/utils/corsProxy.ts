@@ -52,7 +52,10 @@ export async function fetchResource(
         const content = await response.text();
         return { ok: true, content };
       }
-    } catch {
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn(`[CORS Proxy] Resource fetch failed with ${proxy.name}:`, error);
+      }
       continue;
     }
   }

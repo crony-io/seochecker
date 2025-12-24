@@ -2,7 +2,9 @@
  * @fileoverview Robots.txt parser and sitemap detection utilities.
  */
 
+import type { SeoStatus } from '@/types/seo';
 import { normalizeUrl, fetchResource } from '@/utils/corsProxy';
+import { t } from '@/utils/i18nHelper';
 
 /** A single robots.txt directive */
 export interface RobotsDirective {
@@ -22,7 +24,7 @@ export interface RobotsTxtAnalysis {
   disallowedPaths: string[];
   crawlDelay: number | null;
   issues: string[];
-  status: 'good' | 'warning' | 'error' | 'info';
+  status: SeoStatus;
 }
 
 /** Sitemap detection result */
@@ -31,7 +33,7 @@ export interface SitemapAnalysis {
   sitemaps: SitemapInfo[];
   fromRobotsTxt: string[];
   issues: string[];
-  status: 'good' | 'warning' | 'error' | 'info';
+  status: SeoStatus;
 }
 
 /** Individual sitemap info */
@@ -108,19 +110,17 @@ export function parseRobotsTxt(content: string): Omit<RobotsTxtAnalysis, 'found'
 
   // Check for common issues
   if (disallowedPaths.includes('/')) {
-    issues.push('Site is blocking all crawlers with "Disallow: /"');
+    issues.push(t('seo.robotsTxt.analyzers.blockingAll'));
   }
 
-  if (disallowedPaths.some((p) => p.includes('wp-admin') || p.includes('admin'))) {
-    // This is fine, not an issue
-  }
+  // Note: Blocking admin paths (wp-admin, admin) is a common and recommended practice
 
   if (sitemaps.length === 0) {
-    issues.push('No sitemap referenced in robots.txt');
+    issues.push(t('seo.robotsTxt.analyzers.noSitemap'));
   }
 
   if (!userAgents.has('*') && userAgents.size > 0) {
-    issues.push('No rules for generic user-agent (*)');
+    issues.push(t('seo.robotsTxt.analyzers.noGenericAgent'));
   }
 
   return {
@@ -155,7 +155,7 @@ export async function analyzeRobotsTxt(url: string): Promise<RobotsTxtAnalysis> 
       allowedPaths: [],
       disallowedPaths: [],
       crawlDelay: null,
-      issues: ['Invalid URL'],
+      issues: [t('seo.robotsTxt.analyzers.invalidUrl')],
       status: 'error',
     };
   }
@@ -173,7 +173,7 @@ export async function analyzeRobotsTxt(url: string): Promise<RobotsTxtAnalysis> 
       allowedPaths: [],
       disallowedPaths: [],
       crawlDelay: null,
-      issues: ['robots.txt not found or inaccessible'],
+      issues: [t('seo.robotsTxt.analyzers.notAccessible')],
       status: 'warning',
     };
   }
@@ -190,7 +190,7 @@ export async function analyzeRobotsTxt(url: string): Promise<RobotsTxtAnalysis> 
       allowedPaths: [],
       disallowedPaths: [],
       crawlDelay: null,
-      issues: ['robots.txt returns HTML (possibly 404 page)'],
+      issues: [t('seo.robotsTxt.analyzers.returnsHtml')],
       status: 'warning',
     };
   }
@@ -223,7 +223,7 @@ export async function analyzeSitemaps(
       found: false,
       sitemaps: [],
       fromRobotsTxt: [],
-      issues: ['Invalid URL'],
+      issues: [t('seo.robotsTxt.analyzers.invalidUrl')],
       status: 'error',
     };
   }
@@ -270,7 +270,7 @@ export async function analyzeSitemaps(
           source,
         });
         if (source === 'robots.txt') {
-          issues.push(`Sitemap from robots.txt is not valid XML: ${sitemapUrl}`);
+          issues.push(t('seo.robotsTxt.analyzers.sitemapInvalidXml', { url: sitemapUrl }));
         }
       }
     } else {
@@ -281,7 +281,7 @@ export async function analyzeSitemaps(
         source,
       });
       if (source === 'robots.txt') {
-        issues.push(`Sitemap from robots.txt not accessible: ${sitemapUrl}`);
+        issues.push(t('seo.robotsTxt.analyzers.sitemapNotAccessible', { url: sitemapUrl }));
       }
     }
   }
@@ -289,7 +289,7 @@ export async function analyzeSitemaps(
   const foundSitemaps = sitemaps.filter((s) => s.found);
 
   if (foundSitemaps.length === 0) {
-    issues.push('No accessible sitemap found');
+    issues.push(t('seo.robotsTxt.analyzers.noSitemapFound'));
   }
 
   return {

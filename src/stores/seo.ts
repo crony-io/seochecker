@@ -227,8 +227,10 @@ export const useSeoStore = defineStore('seo', () => {
 
       const sitemapResult = await analyzeSitemaps(targetUrl, robotsResult.sitemaps);
       sitemap.value = sitemapResult;
-    } catch {
-      // Silently fail - robots.txt analysis is optional
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('[SEO Store] Robots.txt/sitemap analysis failed:', error);
+      }
     } finally {
       isLoadingRobots.value = false;
     }
@@ -243,8 +245,10 @@ export const useSeoStore = defineStore('seo', () => {
       const doc = parser.parseFromString(html, 'text/html');
       const securityResult = await analyzeSecurityFull(targetUrl, doc);
       security.value = securityResult;
-    } catch {
-      // Silently fail - security analysis is optional
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('[SEO Store] Security analysis failed:', error);
+      }
     } finally {
       isLoadingSecurity.value = false;
     }

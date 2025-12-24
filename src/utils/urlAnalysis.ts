@@ -2,7 +2,9 @@
  * @fileoverview URL structure and readability analysis utilities.
  */
 
+import { MAX_PATH_DEPTH, MAX_SEGMENT_LENGTH, MAX_URL_LENGTH } from '@/constants/seo';
 import type { SeoStatus } from '@/types/seo';
+import { t } from '@/utils/i18nHelper';
 
 // =============================================================================
 // TYPES
@@ -44,14 +46,7 @@ export interface UrlReadability {
 // CONSTANTS
 // =============================================================================
 
-/** Maximum recommended URL length */
-const MAX_URL_LENGTH = 100;
-
-/** Maximum recommended path depth */
-const MAX_PATH_DEPTH = 4;
-
-/** Maximum recommended segment length */
-const MAX_SEGMENT_LENGTH = 30;
+// URL analysis constants are imported from @/constants/seo
 
 /**
  * Minimal stop words subset for URL analysis.
@@ -123,7 +118,7 @@ export function analyzeUrl(url: string): UrlAnalysis {
   try {
     urlObj = new URL(url);
   } catch {
-    return createErrorResult(url, 'Invalid URL format');
+    return createErrorResult(url, t('seo.urlAnalysis.analyzers.invalidUrl'));
   }
 
   const pathname = urlObj.pathname;
@@ -139,44 +134,42 @@ export function analyzeUrl(url: string): UrlAnalysis {
 
   // Check URL length
   if (url.length > MAX_URL_LENGTH) {
-    issues.push(`URL length (${url.length}) exceeds recommended ${MAX_URL_LENGTH} characters`);
+    issues.push(t('seo.urlAnalysis.analyzers.tooLong', { length: url.length, max: MAX_URL_LENGTH }));
   }
 
   // Check path depth
   if (pathSegments.length > MAX_PATH_DEPTH) {
-    issues.push(`Path depth (${pathSegments.length}) exceeds recommended ${MAX_PATH_DEPTH} levels`);
+    issues.push(t('seo.urlAnalysis.analyzers.tooDeep', { depth: pathSegments.length, max: MAX_PATH_DEPTH }));
   }
 
   // Check for underscores
   if (readability.hasUnderscores) {
-    issues.push('URL contains underscores - use hyphens instead for SEO');
+    issues.push(t('seo.urlAnalysis.analyzers.hasUnderscores'));
   }
 
   // Check for uppercase
   if (readability.hasUppercase) {
-    issues.push('URL contains uppercase letters - use lowercase for consistency');
+    issues.push(t('seo.urlAnalysis.analyzers.hasUppercase'));
   }
 
   // Check for special characters
   if (readability.hasSpecialChars) {
-    issues.push('URL contains special characters that may cause issues');
+    issues.push(t('seo.urlAnalysis.analyzers.hasSpecialChars'));
   }
 
   // Check segment lengths
   const longSegments = readability.segmentLengths.filter((l) => l > MAX_SEGMENT_LENGTH);
   if (longSegments.length > 0) {
-    issues.push(`${longSegments.length} URL segment(s) exceed ${MAX_SEGMENT_LENGTH} characters`);
+    issues.push(t('seo.urlAnalysis.analyzers.longSegments', { count: longSegments.length, max: MAX_SEGMENT_LENGTH }));
   }
 
   // Check for query parameters
   if (queryParams.size > 3) {
-    issues.push(`URL has ${queryParams.size} query parameters - consider cleaner URLs`);
+    issues.push(t('seo.urlAnalysis.analyzers.manyParams', { count: queryParams.size }));
   }
 
-  // Check trailing slash consistency
-  if (pathname !== '/' && !pathname.endsWith('/')) {
-    // Not an issue per se, but worth noting
-  }
+  // Note: Trailing slash consistency (pathname !== '/' && !pathname.endsWith('/'))
+  // is not flagged as an issue since both patterns are valid for SEO
 
   // Determine status
   let status: SeoStatus = 'good';

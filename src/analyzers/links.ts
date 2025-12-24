@@ -55,8 +55,11 @@ export function analyzeLinks(
   });
 
   const total = links.length;
-  const status: SeoStatus =
-    internal > 0 && external >= 0 ? 'good' : internal === 0 ? 'warning' : 'good';
+  // Determine status based on link distribution
+  // - good: has internal links
+  // - warning: no internal links but has external links, or no links at all
+  // - error: reserved for future severe issues
+  const status: SeoStatus = internal > 0 ? 'good' : 'warning';
 
   return {
     total,

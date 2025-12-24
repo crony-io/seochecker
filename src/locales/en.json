@@ -233,7 +233,10 @@
       "viewport": "Viewport",
       "canonical": "Canonical",
       "language": "Language",
-      "urlLength": "URL Length"
+      "urlLength": "URL Length",
+      "https": "HTTPS",
+      "doctype": "DOCTYPE",
+      "favicon": "Favicon"
     },
     "performance": {
       "title": "Performance",
@@ -282,7 +285,105 @@
       "pdf": "Download PDF",
       "json": "Download JSON",
       "csv": "Download CSV",
-      "generating": "Generating..."
+      "generating": "Generating...",
+      "report": {
+        "title": "SEO ANALYSIS REPORT",
+        "url": "URL",
+        "analyzed": "Analyzed",
+        "overallScore": "Overall Score",
+        "generated": "Generated",
+        "yes": "Yes",
+        "no": "No",
+        "missing": "Missing",
+        "notSet": "Not set",
+        "none": "None",
+        "chars": "chars",
+        "sections": {
+          "metaTags": "META TAGS",
+          "headings": "HEADINGS",
+          "content": "CONTENT",
+          "images": "IMAGES",
+          "links": "LINKS",
+          "technical": "TECHNICAL",
+          "topKeywords": "TOP KEYWORDS",
+          "mobile": "MOBILE",
+          "anchorText": "ANCHOR TEXT",
+          "resourceOptimization": "RESOURCE OPTIMIZATION",
+          "rendering": "RENDERING",
+          "lazyContent": "LAZY CONTENT",
+          "socialShare": "SOCIAL SHARE",
+          "accessibility": "ACCESSIBILITY",
+          "coreWebVitals": "CORE WEB VITALS (Estimated)",
+          "recommendations": "RECOMMENDATIONS",
+          "contentAnalysis": "Content Analysis",
+          "performance": "Performance",
+          "socialShareBtn": "Social Share"
+        },
+        "fields": {
+          "title": "Title",
+          "titleLength": "Title Length",
+          "description": "Description",
+          "descriptionLength": "Description Length",
+          "canonical": "Canonical",
+          "h1Count": "H1 Count",
+          "totalHeadings": "Total Headings",
+          "properHierarchy": "Proper Hierarchy",
+          "wordCount": "Word Count",
+          "readingTime": "Reading Time",
+          "textHtmlRatio": "Text/HTML Ratio",
+          "paragraphs": "Paragraphs",
+          "total": "Total",
+          "missingAlt": "Missing Alt",
+          "lazyLoading": "Lazy Loading",
+          "internal": "Internal",
+          "external": "External",
+          "nofollow": "Nofollow",
+          "https": "HTTPS",
+          "doctype": "Doctype",
+          "viewport": "Viewport",
+          "charset": "Charset",
+          "responsiveImages": "Responsive Images",
+          "mediaQueries": "Media Queries",
+          "descriptive": "Descriptive",
+          "generic": "Generic",
+          "scriptsMinified": "Scripts Minified",
+          "stylesheetsMinified": "Stylesheets Minified",
+          "printStyles": "Print Styles",
+          "type": "Type",
+          "confidence": "Confidence",
+          "noscriptFallback": "Noscript Fallback",
+          "infiniteScroll": "Infinite Scroll",
+          "lazyImages": "Lazy Images",
+          "pagination": "Pagination",
+          "shareButtons": "Share Buttons",
+          "platforms": "Platforms",
+          "score": "Score",
+          "errors": "Errors",
+          "warnings": "Warnings",
+          "hasMainLandmark": "Has Main Landmark",
+          "lcp": "LCP",
+          "cls": "CLS",
+          "fid": "FID",
+          "inp": "INP",
+          "htmlSize": "HTML Size",
+          "domElements": "DOM Elements",
+          "domDepth": "DOM Depth",
+          "main": "Main",
+          "nav": "Nav",
+          "header": "Header",
+          "footer": "Footer",
+          "landmarks": "Landmarks",
+          "noneDetected": "None detected"
+        },
+        "csv": {
+          "category": "Category",
+          "metric": "Metric",
+          "value": "Value",
+          "status": "Status",
+          "general": "General",
+          "analyzedAt": "Analyzed At"
+        }
+      }
     },
     "checklist": {
       "title": "SEO Checklist",
@@ -290,7 +391,36 @@
       "important": "Important",
       "optional": "Optional",
       "completed": "completed",
-      "pending": "pending"
+      "pending": "pending",
+      "items": {
+        "hasTitle": "Page has a title tag",
+        "titleOptimal": "Title length is optimal (30-60 chars)",
+        "hasDescription": "Page has a meta description",
+        "hasH1": "Page has exactly one H1 tag",
+        "hasViewport": "Viewport meta tag is set",
+        "descriptionOptimal": "Description length is optimal (120-160 chars)",
+        "hasCanonical": "Canonical URL is set",
+        "properHierarchy": "Heading hierarchy is proper",
+        "imagesHaveAlt": "All images have alt attributes",
+        "usesHttps": "Page uses HTTPS",
+        "hasOgTags": "Open Graph tags are set",
+        "hasTwitterCards": "Twitter Card tags are set",
+        "hasLangAttr": "HTML lang attribute is set",
+        "hasFavicon": "Favicon is present",
+        "hasContentLength": "Content has sufficient length (300+ words)",
+        "usesLazyLoading": "Images use lazy loading"
+      },
+      "details": {
+        "characters": "{count} characters",
+        "missingTitle": "Missing title tag",
+        "missingDescription": "Missing meta description",
+        "h1Count": "{count} H1 tag(s) found",
+        "noGaps": "No gaps detected",
+        "hasGaps": "Hierarchy has gaps",
+        "missingAlt": "{count} image(s) missing alt",
+        "words": "{count} words",
+        "lazyImages": "{lazy}/{total} images"
+      }
     },
     "readingLevel": {
       "title": "Reading Level",
@@ -328,7 +458,9 @@
       "compare": "Compare",
       "analyzing": "Analyzing...",
       "metric": "Metric",
-      "overallScore": "Overall Score"
+      "overallScore": "Overall Score",
+      "invalidUrl": "Invalid URL",
+      "analysisFailed": "Analysis failed"
     },
     "resourceHints": {
       "title": "Resource Hints",
@@ -400,7 +532,18 @@
       "noIssues": "No issues detected",
       "viewContent": "View Content",
       "seconds": "seconds",
-      "description": "Robots.txt controls crawler access. Sitemaps help search engines discover pages."
+      "description": "Robots.txt controls crawler access. Sitemaps help search engines discover pages.",
+      "analyzers": {
+        "invalidUrl": "Invalid URL",
+        "notAccessible": "robots.txt not found or inaccessible",
+        "returnsHtml": "robots.txt returns HTML (possibly 404 page)",
+        "blockingAll": "Site is blocking all crawlers with \"Disallow: /\"",
+        "noSitemap": "No sitemap referenced in robots.txt",
+        "noGenericAgent": "No rules for generic user-agent (*)",
+        "sitemapInvalidXml": "Sitemap from robots.txt is not valid XML: {url}",
+        "sitemapNotAccessible": "Sitemap from robots.txt not accessible: {url}",
+        "noSitemapFound": "No accessible sitemap found"
+      }
     },
     "security": {
       "title": "Security Analysis",
@@ -414,6 +557,15 @@
         "upgradeInsecure": "Upgrade Insecure Requests",
         "present": "Present",
         "missing": "Missing"
+      },
+      "analyzers": {
+        "invalidUrl": "Invalid URL",
+        "notHttps": "Site does not use HTTPS",
+        "mixedContent": "{count} mixed content resource(s) detected",
+        "noUpgradeInsecure": "No upgrade-insecure-requests directive",
+        "formInsecure": "Form {id} submits to insecure HTTP URL",
+        "formNoHttps": "Form {id} with sensitive data doesn't use HTTPS action",
+        "formNoProtection": "Form {id} with password field lacks CSRF protection"
       },
       "headers": {
         "title": "Security Headers",
@@ -460,7 +612,17 @@
       "uppercase": "Contains uppercase",
       "specialChars": "Special characters",
       "keywords": "Keywords in URL",
-      "description": "Clean, readable URLs help search engines and users understand page content."
+      "description": "Clean, readable URLs help search engines and users understand page content.",
+      "analyzers": {
+        "invalidUrl": "Invalid URL format",
+        "tooLong": "URL length ({length}) exceeds recommended {max} characters",
+        "tooDeep": "Path depth ({depth}) exceeds recommended {max} levels",
+        "hasUnderscores": "URL contains underscores - use hyphens instead for SEO",
+        "hasUppercase": "URL contains uppercase letters - use lowercase for consistency",
+        "hasSpecialChars": "URL contains special characters that may cause issues",
+        "longSegments": "{count} URL segment(s) exceed {max} characters",
+        "manyParams": "URL has {count} query parameters - consider cleaner URLs"
+      }
     },
     "embeddedContent": {
       "title": "Embedded Content",
@@ -483,7 +645,24 @@
       "poster": "Poster image",
       "responsive": "Responsive",
       "issues": "Issues",
-      "description": "Embedded content should be accessible and optimized for performance."
+      "description": "Embedded content should be accessible and optimized for performance.",
+      "analyzers": {
+        "iframeMissingTitle": "Missing title attribute for accessibility",
+        "iframeMissingSandbox": "Consider adding sandbox attribute for security",
+        "iframesMissingTitle": "{count} iframe(s) missing title attribute",
+        "iframesNoLazyLoading": "{count} iframe(s) without lazy loading",
+        "videoMissingControls": "Missing controls attribute",
+        "videoAutoplayNoMute": "Autoplay without mute may not work in modern browsers",
+        "videoNoCaptions": "No captions/subtitles for accessibility",
+        "videoNoPoster": "Missing poster image",
+        "videosNoControls": "{count} video(s) without controls",
+        "videosAutoplay": "{count} video(s) with autoplay (may not work)",
+        "videosNoCaptions": "{count} video(s) without captions",
+        "audioMissingControls": "Missing controls attribute",
+        "audioAutoplay": "Autoplay may annoy users",
+        "audiosNoControls": "{count} audio element(s) without controls",
+        "audiosAutoplay": "{count} audio element(s) with autoplay"
+      }
     },
     "analyzers": {
       "meta": {

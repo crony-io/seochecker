@@ -1,5 +1,7 @@
 import { readonly, ref } from 'vue';
 
+import { TOAST_DEFAULT_DURATION } from '@/constants/seo';
+
 export type ToastType = 'success' | 'error' | 'info';
 
 export interface Toast {
@@ -28,7 +30,7 @@ export function useToast() {
 
   const show = (type: ToastType, message: string, options?: { duration?: number }): string => {
     const id = createToastId();
-    const duration = options?.duration ?? 3500;
+    const duration = options?.duration ?? TOAST_DEFAULT_DURATION;
 
     const toast: Toast = { id, type, message, duration };
     toasts.value = [...toasts.value, toast];

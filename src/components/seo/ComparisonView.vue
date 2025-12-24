@@ -37,7 +37,7 @@ async function analyzeUrl(
 ): Promise<void> {
   const normalizedUrl = normalizeUrl(url);
   if (!normalizedUrl) {
-    setError('Invalid URL');
+    setError(t('seo.comparison.invalidUrl'));
     return;
   }
 
@@ -56,7 +56,7 @@ async function analyzeUrl(
     const analysis = analyzeSeo(fetchResult.html, normalizedUrl, fetchResult.duration);
     setResult(analysis);
   } catch (err) {
-    setError(err instanceof Error ? err.message : 'Analysis failed');
+    setError(err instanceof Error ? err.message : t('seo.comparison.analysisFailed'));
   } finally {
     setLoading(false);
   }
